@@ -3,599 +3,278 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rent My Space LK</title>
-  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>Rent My Space LK — Find Your Perfect Space</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --saffron:   #F4A11C;
-      --saffron-d: #D4860A;
-      --ruby:      #C0272D;
-      --ruby-d:    #9B1B20;
-      --jade:      #1D6B3A;
-      --jade-l:    #28924F;
-      --cobalt:    #1A3A7C;
-      --cobalt-l:  #2550A8;
-      --gold:      #E8C84A;
-      --ivory:     #FEF9EF;
-      --warm:      #FFF5DC;
-      --ink:       #1A1209;
-      --muted:     #6B5B3E;
-      --border:    rgba(244,161,28,0.22);
+      --bg: #FAFAF8; --surface: #F5F2ED; --surface-2: #EDEAE4;
+      --border: #E2DDD6; --ink: #1C1917; --ink-2: #44403C;
+      --muted: #A8A29E; --accent: #C96A42; --accent-l: #E8896A;
+      --sage: #4A7C6F; --sage-l: #5E9688; --white: #FFFFFF;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--ivory);
-      color: var(--ink);
-      overflow-x: hidden;
-    }
+    body { font-family: 'Figtree', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
     /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      padding: 0 5%;
-      background: var(--ink);
-      border-bottom: 3px solid var(--saffron);
-      display: flex; align-items: center; justify-content: space-between;
-      height: 68px;
-    }
-
-    .nav-logo {
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.5rem;
-      color: var(--saffron);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .flag-stripe { width: 5px; height: 22px; border-radius: 2px; display: inline-block; }
-
-    .nav-links { display: flex; gap: 6px; align-items: center; list-style: none; }
-    .nav-links a {
-      font-size: 0.82rem; font-weight: 700;
-      color: rgba(255,255,255,0.75); text-decoration: none;
-      padding: 7px 14px; border-radius: 6px;
-      letter-spacing: 0.04em; text-transform: uppercase;
-      transition: background 0.2s, color 0.2s;
-    }
-    .nav-links a:hover { background: rgba(244,161,28,0.15); color: var(--saffron); }
-    .nav-cta {
-      background: var(--saffron) !important;
-      color: var(--ink) !important;
-      padding: 8px 20px !important;
-      border-radius: 8px !important;
-      font-weight: 900 !important;
-    }
-    .nav-cta:hover { background: var(--gold) !important; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: rgba(250,250,248,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 1px 20px rgba(28,25,23,0.06); }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--ink-2); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: background 0.2s, color 0.2s; }
+    .nav-links a:hover { background: var(--surface); color: var(--ink); }
+    .nav-cta { background: var(--ink) !important; color: var(--white) !important; border-radius: 10px !important; font-weight: 600 !important; padding: 8px 18px !important; }
+    .nav-cta:hover { background: var(--ink-2) !important; }
 
     /* ── HERO ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      background: var(--ink);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      padding-top: 68px;
-    }
-
-    .hero-pattern {
-      position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(60deg, rgba(244,161,28,0.04) 0, rgba(244,161,28,0.04) 1px, transparent 1px, transparent 40px),
-        repeating-linear-gradient(-60deg, rgba(244,161,28,0.04) 0, rgba(244,161,28,0.04) 1px, transparent 1px, transparent 40px),
-        radial-gradient(ellipse at 70% 50%, rgba(192,39,45,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 60%, rgba(29,107,58,0.15) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .hero-deco-ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(244,161,28,0.12);
-      pointer-events: none;
-    }
-    .ring-1 { width: 700px; height: 700px; top: -250px; right: -200px; }
-    .ring-2 { width: 500px; height: 500px; top: -150px; right: -100px; border-color: rgba(192,39,45,0.1); }
-    .ring-3 { width: 300px; height: 300px; top: -50px; right: 0; border-color: rgba(232,200,74,0.15); }
-
-    .hero-content {
-      position: relative; z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      flex: 1;
-      padding: 0 5%;
-      align-items: center;
-      min-height: calc(100vh - 68px);
-    }
-
-    .hero-left { padding: 60px 40px 60px 0; }
-
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-bottom: 20px;
-    }
-    .eyebrow-flag {
-      display: flex; height: 18px; overflow: hidden; border-radius: 3px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .eyebrow-flag span { display: block; }
-    .ef-saffron { background: var(--saffron); width: 8px; }
-    .ef-red { background: #8B0000; flex: 1; }
-    .ef-green { background: var(--jade); width: 6px; }
-    .ef-orange { background: #FF8C00; width: 6px; }
-    .eyebrow-text {
-      font-size: 0.72rem; font-weight: 800;
-      color: var(--saffron); letter-spacing: 0.15em; text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-family: 'Abril Fatface', serif;
-      font-size: clamp(3rem, 5.5vw, 5.2rem);
-      line-height: 1.0; color: #fff;
-      margin-bottom: 24px; letter-spacing: -0.02em;
-    }
-    .h1-accent { color: var(--saffron); display: block; }
-    .h1-sub-accent { color: var(--gold); }
-
-    .hero-desc {
-      font-size: 1rem; line-height: 1.75;
-      color: rgba(255,255,255,0.65);
-      max-width: 420px; margin-bottom: 36px;
-    }
-
-    .search-wrap {
-      background: rgba(255,255,255,0.06);
-      border: 1.5px solid rgba(244,161,28,0.35);
-      border-radius: 14px; padding: 6px;
-      display: flex; gap: 6px;
-      margin-bottom: 40px;
-      backdrop-filter: blur(8px);
-    }
-    .search-select {
-      background: transparent; border: none; outline: none;
-      color: rgba(255,255,255,0.7); font-family: 'Nunito', sans-serif;
-      font-size: 0.82rem; font-weight: 700;
-      padding: 8px 14px;
-      border-right: 1px solid rgba(244,161,28,0.2);
-      cursor: pointer; -webkit-appearance: none;
-      letter-spacing: 0.03em;
-    }
-    .search-select option { background: var(--ink); color: #fff; }
-    .search-input-wrap {
-      flex: 1; display: flex; align-items: center; gap: 8px; padding: 0 12px;
-    }
-    .search-input-wrap input {
-      flex: 1; background: transparent; border: none; outline: none;
-      font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: #fff;
-    }
-    .search-input-wrap input::placeholder { color: rgba(255,255,255,0.35); }
-    .search-btn {
-      background: var(--saffron); color: var(--ink);
-      border: none; cursor: pointer;
-      padding: 12px 24px; border-radius: 10px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.88rem; font-weight: 900;
-      letter-spacing: 0.04em; text-transform: uppercase;
-      transition: background 0.2s, transform 0.15s; white-space: nowrap;
-    }
-    .search-btn:hover { background: var(--gold); transform: scale(1.03); }
-
-    .province-pills {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px;
-    }
-    .province-pill {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      font-size: 0.73rem; font-weight: 700;
-      padding: 5px 14px; border-radius: 30px;
-      cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
-    }
-    .province-pill:hover, .province-pill.active {
-      background: var(--saffron); color: var(--ink); border-color: var(--saffron);
-    }
-
-    .hero-stats {
-      display: flex; border: 1px solid rgba(244,161,28,0.2);
-      border-radius: 14px; overflow: hidden;
-    }
-    .stat-item {
-      flex: 1; padding: 18px 20px;
-      border-right: 1px solid rgba(244,161,28,0.2);
-    }
+    .hero { min-height: 100vh; padding-top: 64px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-left: 5%; padding-right: 5%; gap: 60px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%; background: var(--surface); border-radius: 0 0 0 80px; z-index: 0; }
+    .hero-left { position: relative; z-index: 1; padding: 60px 0; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); color: var(--ink-2); font-size: 0.72rem; font-weight: 600; padding: 5px 12px; border-radius: 30px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px; border: 1px solid var(--border); }
+    .hero-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.8rem, 5vw, 4.4rem); line-height: 1.08; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 1.05rem; color: var(--ink-2); line-height: 1.72; max-width: 420px; margin-bottom: 36px; }
+    .search-box { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 6px 6px 6px 18px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 24px rgba(28,25,23,0.07); max-width: 480px; margin-bottom: 32px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .search-box:focus-within { border-color: var(--accent); box-shadow: 0 4px 24px rgba(201,106,66,0.12); }
+    .search-box input { flex: 1; border: none; outline: none; font-family: 'Figtree', sans-serif; font-size: 0.9rem; color: var(--ink); background: transparent; }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-btn { background: var(--accent); color: var(--white); border: none; cursor: pointer; padding: 10px 20px; border-radius: 10px; font-family: 'Figtree', sans-serif; font-size: 0.85rem; font-weight: 600; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+    .search-btn:hover { background: var(--accent-l); transform: scale(1.02); }
+    .type-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 44px; }
+    .type-pill { background: var(--white); border: 1.5px solid var(--border); color: var(--ink-2); font-size: 0.75rem; font-weight: 600; padding: 6px 16px; border-radius: 30px; cursor: pointer; transition: all 0.2s; }
+    .type-pill:hover, .type-pill.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .hero-stats { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .stat-item { flex: 1; padding: 18px 20px; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Abril Fatface', serif;
-      font-size: 1.8rem; color: var(--saffron);
-      display: block; line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.7rem; font-weight: 700;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 0.05em; text-transform: uppercase; margin-top: 4px;
-    }
+    .stat-n { font-family: 'DM Serif Display', serif; font-size: 1.7rem; color: var(--ink); display: block; line-height: 1; margin-bottom: 4px; }
+    .stat-l { font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+    .hero-right { position: relative; z-index: 1; padding: 80px 0; }
+    .photo-stack { position: relative; height: 540px; }
+    .photo-card { position: absolute; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(28,25,23,0.12); transition: transform 0.35s; cursor: pointer; }
+    .photo-card:hover { transform: scale(1.02) translateY(-4px); z-index: 5; }
+    .pc-1 { width: 65%; height: 360px; top: 20px; left: 0; z-index: 2; }
+    .pc-2 { width: 52%; height: 250px; top: 0; right: 0; z-index: 3; }
+    .pc-3 { width: 48%; height: 190px; bottom: 20px; right: 10%; z-index: 1; }
+    .pc-bg { width: 100%; height: 100%; transition: transform 0.5s; }
+    .photo-card:hover .pc-bg { transform: scale(1.06); }
+    .pb1 { background: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop") center/cover; }
+    .pb2 { background: url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=500&auto=format&fit=crop") center/cover; }
+    .pb3 { background: url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=500&auto=format&fit=crop") center/cover; }
+    .pc-tag { position: absolute; bottom: 14px; left: 14px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-radius: 10px; padding: 10px 14px; }
+    .pc-tag-name { font-weight: 700; font-size: 0.82rem; color: var(--ink); }
+    .pc-tag-loc { font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
+    .pc-price { position: absolute; top: 12px; right: 12px; background: var(--ink); color: var(--white); font-size: 0.7rem; font-weight: 700; padding: 5px 11px; border-radius: 30px; }
+    .float-badge { position: absolute; bottom: 60px; left: -20px; z-index: 6; background: var(--white); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 32px rgba(28,25,23,0.12); display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); animation: floatAnim 3s ease-in-out infinite; }
+    .float-badge-icon { font-size: 1.5rem; }
+    .float-badge-text { font-size: 0.78rem; font-weight: 700; color: var(--ink); }
+    .float-badge-sub { font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
+    @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
-    .hero-right {
-      position: relative; height: 100%;
-      min-height: 500px;
-      display: flex; align-items: center; justify-content: center;
-    }
+    /* ── SECTIONS ── */
+    .categories { padding: 90px 5% 80px; }
+    .featured { padding: 80px 5%; background: var(--surface); }
+    .how { padding: 90px 5%; }
+    .cities { padding: 80px 5%; background: var(--surface); }
+    .testimonials { padding: 90px 5%; }
+    .cta-wrap { padding: 30px 5% 90px; }
 
-    .mosaic {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 200px 200px 140px;
-      gap: 10px; width: 100%; max-width: 500px;
-    }
-    .m-card {
-      border-radius: 16px; overflow: hidden;
-      position: relative; cursor: pointer; transition: transform 0.3s;
-    }
-    .m-card:hover { transform: scale(1.03); z-index: 3; }
-    .m-card:nth-child(1) { grid-row: 1/3; }
-    .m-card:nth-child(4) { grid-column: 1/3; }
+    .sec-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .sec-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--ink); line-height: 1.12; letter-spacing: -0.025em; }
+    .sec-title span { color: var(--sage); }
+    .sec-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+    .sec-link { font-size: 0.8rem; font-weight: 600; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: gap 0.2s; flex-shrink: 0; }
+    .sec-link:hover { gap: 9px; }
 
-    .m-bg { width: 100%; height: 100%; transition: transform 0.5s; }
-    .m-card:hover .m-bg { transform: scale(1.08); }
+    /* Categories */
+    .cat-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+    .cat-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 18px; padding: 26px 16px 22px; text-align: center; cursor: pointer; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+    .cat-card:hover { border-color: var(--ink); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28,25,23,0.09); }
+    .cat-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+    .cat-name { font-weight: 700; font-size: 0.85rem; color: var(--ink); margin-bottom: 3px; }
+    .cat-num { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
 
-    .m1 { background: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop") center/cover; }
-    .m2 { background: url("https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&auto=format&fit=crop") center/cover; }
-    .m3 { background: url("https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?w=400&auto=format&fit=crop") center/cover; }
-    .m4 { background: url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=700&auto=format&fit=crop") center/cover; }
+    /* Spaces */
+    .spaces-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .space-card { background: var(--white); border-radius: 20px; overflow: hidden; border: 1.5px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+    .space-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(28,25,23,0.1); }
+    .space-img { height: 200px; position: relative; overflow: hidden; }
+    .space-img-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s; }
+    .space-card:hover .space-img-bg { transform: scale(1.06); }
+    .space-img-ph { width: 100%; height: 100%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--muted); }
+    .space-badge { position: absolute; top: 12px; left: 12px; font-size: 0.62rem; font-weight: 700; padding: 4px 11px; border-radius: 30px; letter-spacing: 0.06em; text-transform: uppercase; backdrop-filter: blur(8px); }
+    .badge-dark { background: rgba(28,25,23,0.8); color: #fff; }
+    .badge-accent { background: rgba(201,106,66,0.9); color: #fff; }
+    .badge-sage { background: rgba(74,124,111,0.9); color: #fff; }
+    .space-fav { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; font-size: 0.82rem; cursor: pointer; transition: transform 0.2s; border: none; }
+    .space-fav:hover { transform: scale(1.15); }
+    .space-info { padding: 18px; }
+    .space-type { font-size: 0.65rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+    .space-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; line-height: 1.2; }
+    .space-loc { font-size: 0.75rem; color: var(--muted); margin-bottom: 14px; font-weight: 500; }
+    .space-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--border); }
+    .space-price { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--sage); }
+    .space-price small { font-family: 'Figtree', sans-serif; font-size: 0.65rem; color: var(--muted); font-weight: 500; }
+    .space-rating { display: flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 600; color: var(--ink-2); }
+    .contact-btn { background: var(--ink); color: var(--white); border: none; cursor: pointer; padding: 8px 16px; border-radius: 8px; font-family: 'Figtree', sans-serif; font-size: 0.75rem; font-weight: 700; transition: background 0.2s; }
+    .contact-btn:hover { background: var(--accent); }
 
-    .m-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(26,18,9,0.88) 0%, transparent 100%);
-      padding: 18px 14px 12px; color: #fff;
-    }
-    .m-label-city {
-      font-size: 0.68rem; color: var(--saffron);
-      font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-    }
-    .m-label-title { font-weight: 800; font-size: 0.88rem; line-height: 1.2; }
-    .m-price {
-      position: absolute; top: 10px; right: 10px;
-      background: var(--saffron); color: var(--ink);
-      font-size: 0.68rem; font-weight: 900;
-      padding: 4px 10px; border-radius: 30px;
-    }
+    /* Loading skeleton */
+    .skel { background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .skel-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden; }
+    .skel-img { height: 200px; }
+    .skel-body { padding: 18px; }
+    .skel-line { height: 12px; margin-bottom: 10px; }
+    .skel-line.w60 { width: 60%; }
+    .skel-line.w80 { width: 80%; }
+    .skel-line.w40 { width: 40%; }
 
-    /* ── STRIP ── */
-    .strip {
-      background: var(--ruby); overflow: hidden; padding: 12px 0;
-      border-top: 3px solid var(--saffron); border-bottom: 3px solid var(--saffron);
-    }
-    .strip-track {
-      display: flex; animation: marquee 30s linear infinite; white-space: nowrap;
-    }
-    .strip-item {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 0 28px; font-size: 0.78rem; font-weight: 800;
-      color: #fff; letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .strip-dot { width: 5px; height: 5px; background: var(--saffron); border-radius: 50%; }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    /* No spaces */
+    .no-spaces { grid-column: 1/-1; text-align: center; padding: 60px 20px; }
+    .no-spaces p { color: var(--muted); font-size: 0.9rem; }
 
-    /* ── SECTIONS COMMON ── */
-    .sec-top {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      margin-bottom: 40px;
-    }
-    .sec-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.72rem; font-weight: 900;
-      color: var(--ruby); letter-spacing: 0.14em; text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .sec-label::before {
-      content: ''; width: 20px; height: 3px;
-      background: var(--saffron); border-radius: 2px;
-    }
-    .sec-title {
-      font-family: 'Abril Fatface', serif;
-      font-size: clamp(1.9rem, 3.2vw, 2.8rem);
-      color: var(--ink); line-height: 1.1; letter-spacing: -0.02em;
-    }
-    .t-saffron { color: var(--saffron); }
-    .t-jade { color: var(--jade); }
-    .t-white { color: #fff; }
-    .view-all {
-      font-size: 0.8rem; font-weight: 900; color: var(--ruby);
-      text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em;
-      display: flex; align-items: center; gap: 6px;
-      transition: gap 0.2s; flex-shrink: 0; margin-bottom: 4px;
-    }
-    .view-all:hover { gap: 10px; }
+    /* How it works */
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 52px; }
+    .step { background: var(--white); border: 1.5px solid var(--border); border-radius: 20px; padding: 32px 24px; position: relative; transition: border-color 0.2s, transform 0.2s; }
+    .step:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .step-num { font-family: 'DM Serif Display', serif; font-size: 3rem; line-height: 1; color: var(--border); position: absolute; top: 18px; right: 20px; }
+    .step-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .step-title { font-weight: 700; font-size: 0.95rem; color: var(--ink); margin-bottom: 8px; }
+    .step-desc { font-size: 0.8rem; line-height: 1.68; color: var(--ink-2); }
 
-    /* ── CATEGORIES ── */
-    .categories {
-      padding: 80px 5% 70px; background: var(--ivory); position: relative; overflow: hidden;
-    }
-    .categories::before {
-      content: ''; position: absolute; bottom: 0; right: -80px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(244,161,28,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cat-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;
-    }
-    .cat-card {
-      border-radius: 18px; padding: 28px 18px 22px;
-      text-align: center; cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s;
-      border: 2px solid transparent; overflow: hidden;
-    }
-    .cat-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(26,18,9,0.14); }
-    .cat-c1 { background: linear-gradient(145deg, #FFF3D6, #FFE4A0); border-color: var(--saffron); }
-    .cat-c2 { background: linear-gradient(145deg, #FFE8E8, #FFCACA); border-color: var(--ruby); }
-    .cat-c3 { background: linear-gradient(145deg, #E0F4EA, #B8E8CC); border-color: var(--jade); }
-    .cat-c4 { background: linear-gradient(145deg, #E4EBF8, #C0D0F0); border-color: var(--cobalt); }
-    .cat-c5 { background: linear-gradient(145deg, #FFF8E0, #F5E8A0); border-color: #C09820; }
-    .cat-icon { font-size: 2.4rem; display: block; margin-bottom: 12px; }
-    .cat-name { font-weight: 900; font-size: 0.9rem; color: var(--ink); margin-bottom: 4px; }
-    .cat-count { font-size: 0.72rem; font-weight: 700; color: var(--muted); }
-
-    /* ── FEATURED ── */
-    .featured {
-      padding: 70px 5%; background: var(--warm); position: relative; overflow: hidden;
-    }
-    .featured::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z' fill='none' stroke='rgba(244,161,28,0.07)' stroke-width='1'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .spaces-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; position: relative; z-index: 1;
-    }
-    .space-card {
-      background: #fff; border-radius: 20px; overflow: hidden;
-      border: 2px solid rgba(244,161,28,0.12);
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; cursor: pointer;
-    }
-    .space-card:hover { transform: translateY(-8px); box-shadow: 0 20px 55px rgba(26,18,9,0.13); border-color: var(--saffron); }
-    .space-img { height: 210px; position: relative; overflow: hidden; }
-    .space-img-bg { width: 100%; height: 100%; transition: transform 0.5s; }
-    .space-card:hover .space-img-bg { transform: scale(1.07); }
-    .s1 { background: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600&auto=format&fit=crop") center/cover; }
-    .s2 { background: url("https://images.unsplash.com/photo-1416339306562-f3d12fefd36f?w=600&auto=format&fit=crop") center/cover; }
-    .s3 { background: url("https://images.unsplash.com/photo-1505409859467-3a796fd5798e?w=600&auto=format&fit=crop") center/cover; }
-    .s4 { background: url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&auto=format&fit=crop") center/cover; }
-    .s5 { background: url("https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&auto=format&fit=crop") center/cover; }
-    .s6 { background: url("https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=600&auto=format&fit=crop") center/cover; }
-    .space-badge {
-      position: absolute; top: 12px; left: 12px;
-      font-size: 0.65rem; font-weight: 900; padding: 4px 12px;
-      border-radius: 30px; letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .badge-gold { background: var(--saffron); color: var(--ink); }
-    .badge-jade { background: var(--jade); color: #fff; }
-    .badge-ruby { background: var(--ruby); color: #fff; }
-    .badge-cobalt { background: var(--cobalt); color: #fff; }
-    .space-fav {
-      position: absolute; top: 10px; right: 10px;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,0.9);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; cursor: pointer; transition: transform 0.2s;
-    }
-    .space-fav:hover { transform: scale(1.2); }
-    .space-info { padding: 18px 18px 16px; }
-    .space-type { font-size: 0.67rem; font-weight: 900; color: var(--ruby); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px; }
-    .space-name { font-family: 'Abril Fatface', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; line-height: 1.2; }
-    .space-location { font-size: 0.77rem; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 4px; font-weight: 600; }
-    .space-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1.5px dashed rgba(244,161,28,0.3); }
-    .space-price { font-family: 'Abril Fatface', serif; font-size: 1.25rem; color: var(--jade); }
-    .space-price small { font-family: 'Nunito', sans-serif; font-size: 0.68rem; color: var(--muted); font-weight: 700; }
-    .space-rating { display: flex; align-items: center; gap: 4px; font-size: 0.77rem; font-weight: 800; color: var(--ink); background: var(--warm); padding: 4px 10px; border-radius: 30px; }
-
-    /* ── HOW IT WORKS ── */
-    .how {
-      padding: 80px 5%; background: var(--ink); position: relative; overflow: hidden;
-    }
-    .how-pattern {
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(244,161,28,0.12)'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .how .sec-label { color: var(--saffron); }
-    .how .sec-label::before { background: var(--ruby); }
-    .how .sec-title { color: #fff; }
-    .steps-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border: 1px solid rgba(244,161,28,0.18); border-radius: 20px; overflow: hidden;
-      margin-top: 52px; position: relative; z-index: 1;
-    }
-    .step {
-      padding: 36px 28px; border-right: 1px solid rgba(244,161,28,0.15);
-      position: relative; transition: background 0.3s;
-    }
-    .step:last-child { border-right: none; }
-    .step:hover { background: rgba(244,161,28,0.05); }
-    .step-num {
-      font-family: 'Abril Fatface', serif; font-size: 4rem; line-height: 1;
-      color: rgba(244,161,28,0.12); position: absolute; top: 16px; right: 20px;
-    }
-    .step-icon { font-size: 2.2rem; display: block; margin-bottom: 18px; }
-    .step-title { font-weight: 900; font-size: 1rem; color: var(--saffron); margin-bottom: 10px; }
-    .step-desc { font-size: 0.82rem; line-height: 1.7; color: rgba(255,255,255,0.55); }
-
-    /* ── CITIES ── */
-    .cities { padding: 80px 5%; background: var(--ivory); }
-    .cities-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 200px 160px; gap: 14px; margin-top: 40px;
-    }
-    .city-card {
-      border-radius: 18px; overflow: hidden; position: relative;
-      cursor: pointer; transition: transform 0.3s;
-    }
+    /* Cities */
+    .cities-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: 200px 160px; gap: 12px; margin-top: 44px; }
+    .city-card { border-radius: 18px; overflow: hidden; position: relative; cursor: pointer; transition: transform 0.3s; }
     .city-card:hover { transform: scale(1.02); z-index: 2; }
-    .city-card:first-child { grid-row: 1 / 3; }
-    .city-card:nth-child(3) { grid-column: 3 / 5; }
-    .city-bg { width: 100%; height: 100%; transition: transform 0.5s; }
+    .city-card:first-child { grid-row: 1/3; }
+    .city-card:nth-child(3) { grid-column: 3/5; }
+    .city-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s; }
     .city-card:hover .city-bg { transform: scale(1.07); }
-    .c1 { background: url("https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=600&auto=format&fit=crop") center/cover; }
-    .c2 { background: url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&auto=format&fit=crop") center/cover; }
-    .c3 { background: url("https://images.unsplash.com/photo-1583244685026-d8519b5e3d21?w=700&auto=format&fit=crop") center/cover; }
-    .c4 { background: url("https://images.unsplash.com/photo-1602524816503-a7b45f3a5c21?w=400&auto=format&fit=crop") center/cover; }
-    .c5 { background: url("https://images.unsplash.com/photo-1574180566232-aaad1b5b8450?w=400&auto=format&fit=crop") center/cover; }
-    .city-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,18,9,0.78) 30%, transparent);
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 18px;
-    }
-    .city-name { font-family: 'Abril Fatface', serif; font-size: 1.3rem; color: #fff; margin-bottom: 2px; line-height: 1; }
-    .city-name.big { font-size: 1.8rem; }
-    .city-count { font-size: 0.72rem; font-weight: 700; color: var(--saffron); letter-spacing: 0.06em; }
+    .cb1 { background: url("https://images.unsplash.com/photo-1566438480900-0609be27a4be?w=600&auto=format&fit=crop") center/cover; }
+    .cb2 { background: url("https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&auto=format&fit=crop") center/cover; }
+    .cb3 { background: url("https://images.unsplash.com/photo-1583244685026-d8519b5e3d21?w=700&auto=format&fit=crop") center/cover; }
+    .cb4 { background: url("https://images.unsplash.com/photo-1602524816503-a7b45f3a5c21?w=400&auto=format&fit=crop") center/cover; }
+    .cb5 { background: url("https://images.unsplash.com/photo-1574180566232-aaad1b5b8450?w=400&auto=format&fit=crop") center/cover; }
+    .city-overlay { position: absolute; inset: 0; background: linear-gradient(to top,rgba(28,25,23,0.65) 30%,transparent); display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+    .city-name { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 2px; }
+    .city-name.lg { font-size: 1.7rem; }
+    .city-spaces { font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.75); }
 
-    /* ── TESTIMONIALS ── */
-    .testimonials { padding: 80px 5%; background: var(--ruby); position: relative; overflow: hidden; }
-    .testimonials::before {
-      content: ''; position: absolute; top: -100px; right: -100px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 60%); pointer-events: none;
-    }
-    .testimonials .sec-label { color: rgba(255,255,255,0.6); }
-    .testimonials .sec-title { color: #fff; }
-    .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
-    .t-card {
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 20px; padding: 28px;
-      backdrop-filter: blur(6px); transition: transform 0.3s, background 0.3s;
-    }
-    .t-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.15); }
-    .t-stars { font-size: 0.95rem; margin-bottom: 14px; }
-    .t-quote { font-size: 0.9rem; line-height: 1.75; color: rgba(255,255,255,0.85); margin-bottom: 20px; font-style: italic; }
+    /* Testimonials */
+    .t-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 48px; }
+    .t-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 20px; padding: 28px; transition: transform 0.2s, box-shadow 0.2s; }
+    .t-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(28,25,23,0.07); }
+    .t-stars { color: var(--accent); font-size: 0.85rem; margin-bottom: 14px; letter-spacing: 2px; }
+    .t-text { font-size: 0.88rem; line-height: 1.75; color: var(--ink-2); margin-bottom: 22px; font-style: italic; }
     .t-author { display: flex; align-items: center; gap: 12px; }
-    .t-avatar {
-      width: 42px; height: 42px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Abril Fatface', serif; font-size: 1rem; flex-shrink: 0;
-    }
-    .av1 { background: var(--saffron); color: var(--ink); }
-    .av2 { background: var(--gold); color: var(--ink); }
-    .av3 { background: var(--jade-l); color: #fff; }
-    .t-name { font-weight: 800; font-size: 0.88rem; color: #fff; }
-    .t-role { font-size: 0.72rem; color: rgba(255,255,255,0.55); font-weight: 600; }
+    .t-av { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 0.9rem; flex-shrink: 0; }
+    .av-a { background: var(--surface-2); color: var(--ink); }
+    .av-b { background: var(--accent); color: #fff; }
+    .av-c { background: var(--sage); color: #fff; }
+    .t-name { font-weight: 700; font-size: 0.85rem; color: var(--ink); }
+    .t-role { font-size: 0.7rem; color: var(--muted); margin-top: 1px; }
 
-    /* ── CTA ── */
-    .cta-section { padding: 30px 5% 80px; background: var(--ivory); }
-    .cta-banner {
-      background: linear-gradient(115deg, var(--jade) 0%, var(--jade-l) 50%, #1E8A45 100%);
-      border-radius: 24px; padding: 60px 8%;
-      display: flex; align-items: center; justify-content: space-between;
-      position: relative; overflow: hidden;
-    }
-    .cta-banner::before {
-      content: ''; position: absolute; top: -80px; right: -80px;
-      width: 350px; height: 350px; background: rgba(255,255,255,0.07); border-radius: 50%;
-    }
-    .cta-banner::after {
-      content: ''; position: absolute; bottom: -100px; left: 30%;
-      width: 280px; height: 280px; background: rgba(255,255,255,0.05); border-radius: 50%;
-    }
-    .cta-banner-deco {
-      position: absolute; top: 20px; left: 8%;
-      font-size: 6rem; opacity: 0.07; pointer-events: none;
-      font-family: 'Abril Fatface', serif;
-    }
+    /* CTA */
+    .cta-block { background: var(--ink); border-radius: 24px; padding: 64px 8%; display: flex; align-items: center; justify-content: space-between; position: relative; overflow: hidden; }
+    .cta-block::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; background: rgba(255,255,255,0.03); border-radius: 50%; }
     .cta-text { position: relative; z-index: 1; }
-    .cta-text h2 { font-family: 'Abril Fatface', serif; font-size: 2.4rem; color: #fff; margin-bottom: 12px; line-height: 1.1; }
-    .cta-text p { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 380px; line-height: 1.65; }
-    .cta-actions { display: flex; gap: 14px; position: relative; z-index: 1; flex-shrink: 0; }
-    .btn-saffron {
-      background: var(--saffron); color: var(--ink);
-      padding: 14px 30px; border-radius: 12px; font-weight: 900; font-size: 0.9rem;
-      border: none; cursor: pointer; font-family: 'Nunito', sans-serif;
-      text-transform: uppercase; letter-spacing: 0.06em; transition: background 0.2s, transform 0.2s;
-    }
-    .btn-saffron:hover { background: var(--gold); transform: translateY(-2px); }
-    .btn-ghost {
-      background: transparent; color: #fff;
-      padding: 14px 30px; border-radius: 12px; font-weight: 800; font-size: 0.9rem;
-      border: 2px solid rgba(255,255,255,0.5); cursor: pointer;
-      font-family: 'Nunito', sans-serif; text-transform: uppercase; letter-spacing: 0.06em;
-      transition: all 0.2s;
-    }
-    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .cta-text h2 { font-family: 'DM Serif Display', serif; font-size: 2.4rem; color: #fff; margin-bottom: 10px; line-height: 1.1; }
+    .cta-text h2 em { color: var(--accent-l); font-style: italic; }
+    .cta-text p { font-size: 0.95rem; color: rgba(255,255,255,0.6); max-width: 380px; line-height: 1.65; }
+    .cta-btns { display: flex; gap: 12px; position: relative; z-index: 1; flex-shrink: 0; }
+    .btn-accent { background: var(--accent); color: #fff; padding: 13px 28px; border-radius: 12px; font-weight: 600; font-size: 0.88rem; border: none; cursor: pointer; font-family: 'Figtree', sans-serif; transition: background 0.2s, transform 0.15s; }
+    .btn-accent:hover { background: var(--accent-l); transform: translateY(-2px); }
+    .btn-ghost-w { background: transparent; color: rgba(255,255,255,0.7); padding: 13px 28px; border-radius: 12px; font-weight: 600; font-size: 0.88rem; border: 1.5px solid rgba(255,255,255,0.2); cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.2s; }
+    .btn-ghost-w:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
 
-    /* ── FOOTER ── */
-    footer { background: var(--ink); padding: 60px 5% 28px; }
-    .footer-rainbow {
-      height: 4px; margin-bottom: 50px;
-      background: repeating-linear-gradient(90deg,
-        var(--saffron) 0%, var(--saffron) 20%, var(--ruby) 20%, var(--ruby) 40%,
-        var(--jade) 40%, var(--jade) 60%, var(--cobalt) 60%, var(--cobalt) 80%,
-        var(--gold) 80%, var(--gold) 100%
-      );
-    }
+    /* Footer */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 56px 5% 28px; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
-    .footer-logo { font-family: 'Abril Fatface', serif; font-size: 1.5rem; color: var(--saffron); margin-bottom: 14px; display: block; }
-    .footer-brand p { font-size: 0.83rem; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 270px; margin-bottom: 22px; }
+    .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--ink); margin-bottom: 12px; display: block; }
+    .footer-logo span { color: var(--accent); }
+    .footer-brand p { font-size: 0.82rem; line-height: 1.72; color: var(--muted); max-width: 260px; margin-bottom: 22px; }
     .footer-social { display: flex; gap: 8px; }
-    .social-btn {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: rgba(255,255,255,0.08);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 900; color: rgba(255,255,255,0.5);
-      cursor: pointer; transition: background 0.2s, color 0.2s;
-    }
-    .social-btn:hover { background: var(--saffron); color: var(--ink); }
-    .footer-col h4 { font-weight: 900; font-size: 0.8rem; color: var(--saffron); margin-bottom: 18px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .soc-btn { width: 34px; height: 34px; border-radius: 8px; background: var(--border); color: var(--ink-2); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .soc-btn:hover { background: var(--ink); color: #fff; }
+    .footer-col h4 { font-weight: 700; font-size: 0.75rem; color: var(--ink); margin-bottom: 16px; letter-spacing: 0.08em; text-transform: uppercase; }
     .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links a { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--saffron); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; }
-    .footer-bottom p { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
-    .footer-bottom a { color: var(--saffron); text-decoration: none; }
+    .footer-links li { margin-bottom: 9px; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 0.74rem; color: var(--muted); }
+    .footer-bottom a { color: var(--accent); text-decoration: none; }
 
-    /* ── ANIMATIONS ── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* ── CONTACT MODAL ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(28,25,23,0.6); z-index: 500; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--white); border-radius: 24px; max-width: 680px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(28,25,23,0.2); animation: modalIn 0.3s ease; }
+    @keyframes modalIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 10; }
+    .modal-close:hover { background: var(--border); }
+    .modal-images { position: relative; height: 280px; overflow: hidden; border-radius: 24px 24px 0 0; }
+    .modal-img-main { width: 100%; height: 100%; background-size: cover; background-position: center; }
+    .modal-img-thumbs { display: flex; gap: 6px; padding: 10px 20px; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .modal-thumb { width: 56px; height: 42px; border-radius: 8px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid transparent; flex-shrink: 0; transition: border-color 0.2s; }
+    .modal-thumb.active { border-color: var(--accent); }
+    .modal-body { padding: 24px 28px 28px; position: relative; }
+    .modal-type { font-size: 0.65rem; font-weight: 700; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+    .modal-title { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--ink); margin-bottom: 6px; line-height: 1.15; }
+    .modal-loc { font-size: 0.82rem; color: var(--muted); font-weight: 500; margin-bottom: 16px; }
+    .modal-price-row { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+    .modal-price { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--sage); }
+    .modal-price small { font-family: 'Figtree', sans-serif; font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+    .modal-badge { background: var(--surface-2); color: var(--ink-2); font-size: 0.65rem; font-weight: 700; padding: 4px 12px; border-radius: 30px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .modal-desc { font-size: 0.88rem; line-height: 1.75; color: var(--ink-2); margin-bottom: 24px; }
+    .modal-contact-title { font-size: 0.72rem; font-weight: 700; color: var(--ink); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+    .modal-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .contact-item { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+    .contact-item:hover { border-color: var(--accent); background: #FFF8F5; }
+    .contact-item-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .contact-item-label { font-size: 0.65rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1px; }
+    .contact-item-value { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+    .contact-person { display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; }
+    .contact-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 1rem; flex-shrink: 0; }
+    .contact-person-name { font-weight: 700; font-size: 0.88rem; color: var(--ink); }
+    .contact-person-role { font-size: 0.7rem; color: var(--muted); }
 
-    /* ── RESPONSIVE ── */
+    /* Animations */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Responsive */
     @media (max-width: 960px) {
-      .hero-content { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero::before { display: none; }
       .hero-right { display: none; }
-      .cat-grid { grid-template-columns: repeat(3, 1fr); }
-      .spaces-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .steps-grid .step:nth-child(2) { border-right: none; }
-      .cities-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+      .cat-grid { grid-template-columns: repeat(3,1fr); }
+      .spaces-grid { grid-template-columns: repeat(2,1fr); }
+      .steps { grid-template-columns: repeat(2,1fr); }
+      .cities-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
       .cities-grid .city-card:first-child { grid-row: auto; }
       .cities-grid .city-card:nth-child(3) { grid-column: auto; }
       .t-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .cta-banner { flex-direction: column; gap: 28px; text-align: center; }
+      .cta-block { flex-direction: column; gap: 28px; text-align: center; }
       .cta-text p { margin: 0 auto; }
       .nav-links { display: none; }
+      .modal-contact-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .cat-grid { grid-template-columns: repeat(2,1fr); }
       .spaces-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
-      .cta-actions { flex-direction: column; }
+      .cta-btns { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">
-      <div style="display:flex;gap:2px;align-items:center;">
-        <span class="flag-stripe" style="background:var(--saffron);"></span>
-        <span class="flag-stripe" style="background:#8B0000;width:3px;"></span>
-        <span class="flag-stripe" style="background:var(--jade);width:3px;"></span>
-      </div>
-      Rent My Space LK
-    </a>
+  <nav id="nav">
+    <a href="#" class="nav-logo">Rent My Space <span>LK</span></a>
     <ul class="nav-links">
       <li><a href="#">Find Spaces</a></li>
       <li><a href="#">List Space</a></li>
@@ -607,317 +286,352 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-pattern"></div>
-    <div class="hero-deco-ring ring-1"></div>
-    <div class="hero-deco-ring ring-2"></div>
-    <div class="hero-deco-ring ring-3"></div>
-    <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-eyebrow">
-          <div class="eyebrow-flag">
-            <span class="ef-saffron"></span>
-            <span class="ef-red"></span>
-            <span class="ef-green"></span>
-            <span class="ef-orange"></span>
-          </div>
-          <span class="eyebrow-text">Sri Lanka's Space Rental Platform</span>
-        </div>
-        <h1>
-          Discover &
-          <span class="h1-accent">Rent Amazing</span>
-          <span>Spaces <span class="h1-sub-accent">Across LK</span></span>
-        </h1>
-        <p class="hero-desc">From vibrant Colombo offices to serene Kandy studios — find and book the perfect space for your work, events, and creativity. Aney, it's that easy!</p>
-        <div class="search-wrap">
-          <select class="search-select">
-            <option>All Types</option>
-            <option>Office Space</option>
-            <option>Event Hall</option>
-            <option>Studio</option>
-            <option>Meeting Room</option>
-            <option>Kitchen</option>
-          </select>
-          <div class="search-input-wrap">
-            <span style="color:rgba(255,255,255,0.4)">📍</span>
-            <input type="text" placeholder="Search city or space name…" />
-          </div>
-          <button class="search-btn">Search 🔍</button>
-        </div>
-        <div class="province-pills">
-          <div class="province-pill active">All</div>
-          <div class="province-pill">🏙️ Colombo</div>
-          <div class="province-pill">🌿 Kandy</div>
-          <div class="province-pill">⛵ Galle</div>
-          <div class="province-pill">🌊 Negombo</div>
-          <div class="province-pill">🏔️ Nuwara Eliya</div>
-          <div class="province-pill">🐘 Anuradhapura</div>
-        </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-num">1,240+</span>
-            <span class="stat-label">Listed Spaces</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-num">25</span>
-            <span class="stat-label">Cities & Towns</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-num">8,500+</span>
-            <span class="stat-label">Happy Renters</span>
-          </div>
-        </div>
+    <div class="hero-left">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Sri Lanka's Space Rental Platform</div>
+      <h1>Find the perfect<br/>space to <em>work</em><br/>and create.</h1>
+      <p class="hero-sub">Browse offices, studios, event halls and more across Sri Lanka. Book by the hour, day, or month — simple and stress-free.</p>
+      <div class="search-box">
+        <span style="color:var(--muted);font-size:0.9rem">📍</span>
+        <input type="text" placeholder="Search by city, space type or name…" id="searchInput"/>
+        <button class="search-btn" onclick="filterSpaces()">Search</button>
       </div>
-      <div class="hero-right">
-        <div class="mosaic">
-          <div class="m-card">
-            <div class="m-bg m1"></div>
-            <div class="m-price">Rs. 2,500/hr</div>
-            <div class="m-label">
-              <div class="m-label-city">📍 Colombo 07</div>
-              <div class="m-label-title">Sky Lounge Office</div>
-            </div>
-          </div>
-          <div class="m-card">
-            <div class="m-bg m2"></div>
-            <div class="m-price">Rs. 4,500/hr</div>
-            <div class="m-label">
-              <div class="m-label-city">📍 Nugegoda</div>
-              <div class="m-label-title">Lumina Studio</div>
-            </div>
-          </div>
-          <div class="m-card">
-            <div class="m-bg m3"></div>
-            <div class="m-price">Rs. 1,800/hr</div>
-            <div class="m-label">
-              <div class="m-label-city">📍 Kandy</div>
-              <div class="m-label-title">Creative Studio</div>
-            </div>
-          </div>
-          <div class="m-card">
-            <div class="m-bg m4"></div>
-            <div class="m-price">Rs. 45,000/day</div>
-            <div class="m-label">
-              <div class="m-label-city">📍 Galle Fort</div>
-              <div class="m-label-title">Grand Banquet Hall</div>
-            </div>
-          </div>
-        </div>
+      <div class="type-pills">
+        <div class="type-pill active" onclick="filterByType('')">All</div>
+        <div class="type-pill" onclick="filterByType('Office Space')">Offices</div>
+        <div class="type-pill" onclick="filterByType('Event Hall')">Event Halls</div>
+        <div class="type-pill" onclick="filterByType('Studio')">Studios</div>
+        <div class="type-pill" onclick="filterByType('Commercial Kitchen')">Kitchens</div>
+        <div class="type-pill" onclick="filterByType('Meeting Room')">Meeting Rooms</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-n" id="totalCount">—</span><span class="stat-l">Spaces</span></div>
+        <div class="stat-item" style="border-right:1px solid var(--border)"><span class="stat-n">25</span><span class="stat-l">Cities</span></div>
+        <div class="stat-item"><span class="stat-n">8,500+</span><span class="stat-l">Renters</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="photo-stack">
+        <div class="photo-card pc-1"><div class="pc-bg pb1"></div><div class="pc-price">Rs. 2,500/hr</div><div class="pc-tag"><div class="pc-tag-name">Sky Lounge Office</div><div class="pc-tag-loc">📍 Colombo 07</div></div></div>
+        <div class="photo-card pc-2"><div class="pc-bg pb2"></div><div class="pc-price">Rs. 4,500/hr</div><div class="pc-tag"><div class="pc-tag-name">Lumina Studio</div><div class="pc-tag-loc">📍 Nugegoda</div></div></div>
+        <div class="photo-card pc-3"><div class="pc-bg pb3"></div><div class="pc-price">Rs. 45,000/day</div><div class="pc-tag"><div class="pc-tag-name">Galle Banquet Hall</div><div class="pc-tag-loc">📍 Galle Fort</div></div></div>
+        <div class="float-badge"><div class="float-badge-icon">✅</div><div><div class="float-badge-text">Verified Listings</div><div class="float-badge-sub">Every space is quality-checked</div></div></div>
       </div>
     </div>
   </section>
-
-  <!-- MARQUEE -->
-  <div class="strip">
-    <div class="strip-track">
-      <span class="strip-item"><span class="strip-dot"></span>1,240+ Spaces Listed</span>
-      <span class="strip-item"><span class="strip-dot"></span>Colombo · Kandy · Galle · Negombo · Jaffna</span>
-      <span class="strip-item"><span class="strip-dot"></span>Book by Hour, Day or Month</span>
-      <span class="strip-item"><span class="strip-dot"></span>Verified Listings</span>
-      <span class="strip-item"><span class="strip-dot"></span>Secure Payments in LKR</span>
-      <span class="strip-item"><span class="strip-dot"></span>24/7 Customer Support</span>
-      <span class="strip-item"><span class="strip-dot"></span>1,240+ Spaces Listed</span>
-      <span class="strip-item"><span class="strip-dot"></span>Colombo · Kandy · Galle · Negombo · Jaffna</span>
-      <span class="strip-item"><span class="strip-dot"></span>Book by Hour, Day or Month</span>
-      <span class="strip-item"><span class="strip-dot"></span>Verified Listings</span>
-      <span class="strip-item"><span class="strip-dot"></span>Secure Payments in LKR</span>
-      <span class="strip-item"><span class="strip-dot"></span>24/7 Customer Support</span>
-    </div>
-  </div>
 
   <!-- CATEGORIES -->
   <section class="categories reveal">
-    <div class="sec-top">
-      <div>
-        <div class="sec-label">Browse by Type</div>
-        <div class="sec-title">Every Space You <span class="t-saffron">Need</span></div>
-      </div>
-      <a href="#" class="view-all">View all →</a>
+    <div class="sec-row" style="margin-bottom:40px">
+      <div><div class="sec-eyebrow">Browse by Type</div><div class="sec-title">Every space you <span>need</span></div></div>
+      <a href="#" class="sec-link">View all →</a>
     </div>
     <div class="cat-grid">
-      <div class="cat-card cat-c1"><span class="cat-icon">🏢</span><div class="cat-name">Office Space</div><div class="cat-count">342 listings</div></div>
-      <div class="cat-card cat-c2"><span class="cat-icon">🎉</span><div class="cat-name">Event Halls</div><div class="cat-count">198 listings</div></div>
-      <div class="cat-card cat-c3"><span class="cat-icon">🎨</span><div class="cat-name">Studios</div><div class="cat-count">124 listings</div></div>
-      <div class="cat-card cat-c4"><span class="cat-icon">📚</span><div class="cat-name">Meeting Rooms</div><div class="cat-count">265 listings</div></div>
-      <div class="cat-card cat-c5"><span class="cat-icon">🍽️</span><div class="cat-name">Kitchen Space</div><div class="cat-count">87 listings</div></div>
+      <div class="cat-card" onclick="filterByType('Office Space')"><span class="cat-icon">🏢</span><div class="cat-name">Office Space</div><div class="cat-num" id="cnt-office">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Event Hall')"><span class="cat-icon">🎉</span><div class="cat-name">Event Halls</div><div class="cat-num" id="cnt-event">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Studio')"><span class="cat-icon">🎨</span><div class="cat-name">Studios</div><div class="cat-num" id="cnt-studio">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Meeting Room')"><span class="cat-icon">📋</span><div class="cat-name">Meeting Rooms</div><div class="cat-num" id="cnt-meeting">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Commercial Kitchen')"><span class="cat-icon">🍽️</span><div class="cat-name">Kitchen Space</div><div class="cat-num" id="cnt-kitchen">— listings</div></div>
     </div>
   </section>
 
-  <!-- FEATURED -->
+  <!-- FEATURED SPACES — loaded from Firebase -->
   <section class="featured reveal">
-    <div class="sec-top" style="position:relative;z-index:1;">
-      <div>
-        <div class="sec-label">Handpicked for You</div>
-        <div class="sec-title">Featured <span class="t-jade">Spaces</span></div>
-      </div>
-      <a href="#" class="view-all">View all spaces →</a>
+    <div class="sec-row" style="margin-bottom:40px">
+      <div><div class="sec-eyebrow">Available Now</div><div class="sec-title">Listed <span>spaces</span></div></div>
+      <a href="#" class="sec-link">View all →</a>
     </div>
-    <div class="spaces-grid">
-      <div class="space-card">
-        <div class="space-img"><div class="space-img-bg s1"></div><div class="space-badge badge-gold">⭐ Top Rated</div><div class="space-fav">🤍</div></div>
-        <div class="space-info"><div class="space-type">Office Space</div><div class="space-name">Liberty Co-Work, Col 3</div><div class="space-location">📍 Colombo, Western Province</div><div class="space-footer"><div class="space-price">Rs. 2,800 <small>/ hour</small></div><div class="space-rating">⭐ 4.9 <span style="color:var(--muted);font-weight:600">(84)</span></div></div></div>
-      </div>
-      <div class="space-card">
-        <div class="space-img"><div class="space-img-bg s2"></div><div class="space-badge badge-cobalt">✨ New</div><div class="space-fav">🤍</div></div>
-        <div class="space-info"><div class="space-type">Photography Studio</div><div class="space-name">Lumina Studio — Nugegoda</div><div class="space-location">📍 Nugegoda, Western Province</div><div class="space-footer"><div class="space-price">Rs. 4,500 <small>/ hour</small></div><div class="space-rating">⭐ 4.7 <span style="color:var(--muted);font-weight:600">(31)</span></div></div></div>
-      </div>
-      <div class="space-card">
-        <div class="space-img"><div class="space-img-bg s3"></div><div class="space-badge badge-ruby">🔥 Popular</div><div class="space-fav">🤍</div></div>
-        <div class="space-info"><div class="space-type">Event Hall</div><div class="space-name">Galle Fort Banquet Hall</div><div class="space-location">📍 Galle, Southern Province</div><div class="space-footer"><div class="space-price">Rs. 45,000 <small>/ day</small></div><div class="space-rating">⭐ 5.0 <span style="color:var(--muted);font-weight:600">(12)</span></div></div></div>
-      </div>
-      <div class="space-card">
-        <div class="space-img"><div class="space-img-bg s4"></div><div class="space-badge badge-jade">💚 Best Value</div><div class="space-fav">🤍</div></div>
-        <div class="space-info"><div class="space-type">Meeting Room</div><div class="space-name">The Hub — Bambalapitiya</div><div class="space-location">📍 Colombo, Western Province</div><div class="space-footer"><div class="space-price">Rs. 1,500 <small>/ hour</small></div><div class="space-rating">⭐ 4.8 <span style="color:var(--muted);font-weight:600">(57)</span></div></div></div>
-      </div>
-      <div class="space-card">
-        <div class="space-img"><div class="space-img-bg s5"></div><div class="space-fav">🤍</div></div>
-        <div class="space-info"><div class="space-type">Commercial Kitchen</div><div class="space-name">Chef's Table — Kandy</div><div class="space-location">📍 Kandy, Central Province</div><div class="space-footer"><div class="space-price">Rs. 3,000 <small>/ hour</small></div><div class="space-rating">⭐ 4.6 <span style="color:var(--muted);font-weight:600">(22)</span></div></div></div>
-      </div>
-      <div class="space-card">
-        <div class="space-img"><div class="space-img-bg s6"></div><div class="space-badge badge-cobalt">🎙️ Studio</div><div class="space-fav">🤍</div></div>
-        <div class="space-info"><div class="space-type">Podcast Studio</div><div class="space-name">Echo Studio — Rajagiriya</div><div class="space-location">📍 Rajagiriya, Western Province</div><div class="space-footer"><div class="space-price">Rs. 2,200 <small>/ hour</small></div><div class="space-rating">⭐ 4.8 <span style="color:var(--muted);font-weight:600">(44)</span></div></div></div>
-      </div>
+    <div class="spaces-grid" id="spacesGrid">
+      <!-- Skeleton loading -->
+      <div class="skel-card"><div class="skel-img skel"></div><div class="skel-body"><div class="skel-line skel w40"></div><div class="skel-line skel w80"></div><div class="skel-line skel w60"></div></div></div>
+      <div class="skel-card"><div class="skel-img skel"></div><div class="skel-body"><div class="skel-line skel w40"></div><div class="skel-line skel w80"></div><div class="skel-line skel w60"></div></div></div>
+      <div class="skel-card"><div class="skel-img skel"></div><div class="skel-body"><div class="skel-line skel w40"></div><div class="skel-line skel w80"></div><div class="skel-line skel w60"></div></div></div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
   <section class="how reveal">
-    <div class="how-pattern"></div>
-    <div class="sec-label">Simple Process</div>
-    <div class="sec-title t-white">How It <span class="t-saffron">Works</span></div>
-    <div class="steps-grid">
-      <div class="step"><div class="step-num">01</div><div class="step-icon">🔍</div><div class="step-title">Search & Discover</div><p class="step-desc">Browse spaces across all 25 districts. Filter by type, budget, capacity, and availability.</p></div>
-      <div class="step"><div class="step-num">02</div><div class="step-icon">📅</div><div class="step-title">Choose Your Time</div><p class="step-desc">Select hours, days, or months you need. Real-time calendar shows live availability.</p></div>
-      <div class="step"><div class="step-num">03</div><div class="step-icon">💳</div><div class="step-title">Pay Securely in LKR</div><p class="step-desc">Book with card, eZCash, mCash, or bank transfer. Full refund guarantee included.</p></div>
-      <div class="step"><div class="step-num">04</div><div class="step-icon">🎉</div><div class="step-title">Walk In & Create</div><p class="step-desc">Show up and focus on what matters. Our team is always a call or message away.</p></div>
+    <div class="sec-eyebrow">Simple Process</div>
+    <div class="sec-title">How it <span>works</span></div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><span class="step-icon">🔍</span><div class="step-title">Search & Discover</div><p class="step-desc">Browse spaces across all 25 districts. Filter by type, budget, capacity, and availability.</p></div>
+      <div class="step"><div class="step-num">02</div><span class="step-icon">📅</span><div class="step-title">Choose Your Time</div><p class="step-desc">Pick the exact hours, days, or months you need. Real-time availability makes it effortless.</p></div>
+      <div class="step"><div class="step-num">03</div><span class="step-icon">📞</span><div class="step-title">Contact Directly</div><p class="step-desc">Reach the space owner directly via call, WhatsApp, or email. Fast and hassle-free.</p></div>
+      <div class="step"><div class="step-num">04</div><span class="step-icon">🎉</span><div class="step-title">Walk In & Create</div><p class="step-desc">Show up and focus on what matters. Every listed space is verified for quality.</p></div>
     </div>
   </section>
 
   <!-- CITIES -->
   <section class="cities reveal">
-    <div class="sec-top">
-      <div>
-        <div class="sec-label">Explore by City</div>
-        <div class="sec-title">Spaces Across <span class="t-saffron">Sri Lanka</span></div>
-      </div>
-      <a href="#" class="view-all">All cities →</a>
+    <div class="sec-row" style="margin-bottom:0">
+      <div><div class="sec-eyebrow">Explore by City</div><div class="sec-title">Spaces across <span>Sri Lanka</span></div></div>
+      <a href="#" class="sec-link">All cities →</a>
     </div>
     <div class="cities-grid">
-      <div class="city-card"><div class="city-bg c1"></div><div class="city-overlay"><div class="city-name big">Colombo</div><div class="city-count">☕ 528 spaces available</div></div></div>
-      <div class="city-card"><div class="city-bg c2"></div><div class="city-overlay"><div class="city-name">Kandy</div><div class="city-count">🌿 214 spaces</div></div></div>
-      <div class="city-card"><div class="city-bg c3"></div><div class="city-overlay"><div class="city-name">Galle & South</div><div class="city-count">⛵ 187 spaces</div></div></div>
-      <div class="city-card"><div class="city-bg c4"></div><div class="city-overlay"><div class="city-name">Negombo</div><div class="city-count">🌊 96 spaces</div></div></div>
-      <div class="city-card"><div class="city-bg c5"></div><div class="city-overlay"><div class="city-name">Jaffna</div><div class="city-count">🌺 73 spaces</div></div></div>
+      <div class="city-card"><div class="city-bg cb1"></div><div class="city-overlay"><div class="city-name lg">Colombo</div><div class="city-spaces">Western Province</div></div></div>
+      <div class="city-card"><div class="city-bg cb2"></div><div class="city-overlay"><div class="city-name">Kandy</div><div class="city-spaces">Central Province</div></div></div>
+      <div class="city-card"><div class="city-bg cb3"></div><div class="city-overlay"><div class="city-name">Galle & South</div><div class="city-spaces">Southern Province</div></div></div>
+      <div class="city-card"><div class="city-bg cb4"></div><div class="city-overlay"><div class="city-name">Negombo</div><div class="city-spaces">Western Province</div></div></div>
+      <div class="city-card"><div class="city-bg cb5"></div><div class="city-overlay"><div class="city-name">Jaffna</div><div class="city-spaces">Northern Province</div></div></div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials reveal">
-    <div class="sec-label">Real Stories</div>
-    <div class="sec-title">Loved by Renters <span class="t-saffron">Island-wide</span></div>
+    <div class="sec-eyebrow">Real Stories</div>
+    <div class="sec-title">Loved by renters <span>island-wide</span></div>
     <div class="t-grid">
-      <div class="t-card">
-        <div class="t-stars">⭐⭐⭐⭐⭐</div>
-        <p class="t-quote">"Found an amazing photography studio in Nugegoda within minutes. Booking was seamless and the space was exactly as described. Machan, this site is class!"</p>
-        <div class="t-author"><div class="t-avatar av1">DP</div><div><div class="t-name">Dinesh Perera</div><div class="t-role">Freelance Photographer, Colombo</div></div></div>
-      </div>
-      <div class="t-card">
-        <div class="t-stars">⭐⭐⭐⭐⭐</div>
-        <p class="t-quote">"We hosted our startup launch at a stunning Galle event hall through Rent My Space LK. So easy to organize and the space was absolutely beautiful. 10/10 would recommend!"</p>
-        <div class="t-author"><div class="t-avatar av2">AJ</div><div><div class="t-name">Anushka Jayawardena</div><div class="t-role">Co-Founder, TechStart LK</div></div></div>
-      </div>
-      <div class="t-card">
-        <div class="t-stars">⭐⭐⭐⭐⭐</div>
-        <p class="t-quote">"As a space owner in Kandy, listing my property brought me consistent bookings from day one. The dashboard is clean and support is superb. Bohoma sthuthi!"</p>
-        <div class="t-author"><div class="t-avatar av3">RF</div><div><div class="t-name">Roshan Fernando</div><div class="t-role">Space Owner, Kandy</div></div></div>
-      </div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-text">"Found an amazing photography studio in Nugegoda within minutes. The booking process was seamless and the space was exactly as described."</p><div class="t-author"><div class="t-av av-a">DP</div><div><div class="t-name">Dinesh Perera</div><div class="t-role">Freelance Photographer, Colombo</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-text">"We hosted our startup's product launch at a beautiful Galle event hall. Incredibly easy to organise and the space was absolutely stunning."</p><div class="t-author"><div class="t-av av-b">AJ</div><div><div class="t-name">Anushka Jayawardena</div><div class="t-role">Co-Founder, TechStart LK</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-text">"As a space owner, listing my property was simple. The platform brought consistent bookings from day one and the dashboard is clean and easy to manage."</p><div class="t-author"><div class="t-av av-c">RF</div><div><div class="t-name">Roshan Fernando</div><div class="t-role">Space Owner, Kandy</div></div></div></div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-section reveal">
-    <div class="cta-banner">
-      <div class="cta-banner-deco">LK</div>
+  <div class="cta-wrap reveal">
+    <div class="cta-block">
       <div class="cta-text">
-        <h2>Own a Space?<br/>Start Earning Today.</h2>
-        <p>List your office, studio, event hall, or any space for free and reach thousands of renters across all 9 provinces of Sri Lanka.</p>
+        <h2>Own a space?<br/><em>Start earning today.</em></h2>
+        <p>List your office, studio, or event hall for free and reach thousands of renters across Sri Lanka.</p>
       </div>
-      <div class="cta-actions">
-        <button class="btn-saffron">List Your Space →</button>
-        <button class="btn-ghost">Learn More</button>
+      <div class="cta-btns">
+        <button class="btn-accent">List Your Space</button>
+        <button class="btn-ghost-w">Learn More</button>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-rainbow"></div>
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="footer-logo">Rent My Space LK</span>
-        <p>Sri Lanka's leading platform for discovering and booking unique spaces — from co-working offices to event halls and creative studios, island-wide.</p>
-        <div class="footer-social">
-          <div class="social-btn">f</div>
-          <div class="social-btn">in</div>
-          <div class="social-btn">ig</div>
-          <div class="social-btn">yt</div>
-        </div>
+        <span class="footer-logo">Rent My Space <span>LK</span></span>
+        <p>Sri Lanka's platform for discovering and booking unique spaces — offices, studios, event halls and more, island-wide.</p>
+        <div class="footer-social"><div class="soc-btn">f</div><div class="soc-btn">in</div><div class="soc-btn">ig</div><div class="soc-btn">yt</div></div>
       </div>
-      <div class="footer-col">
-        <h4>Explore</h4>
-        <ul class="footer-links">
-          <li><a href="#">Office Spaces</a></li>
-          <li><a href="#">Event Halls</a></li>
-          <li><a href="#">Studios</a></li>
-          <li><a href="#">Meeting Rooms</a></li>
-          <li><a href="#">Kitchen Space</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Cities</h4>
-        <ul class="footer-links">
-          <li><a href="#">Colombo</a></li>
-          <li><a href="#">Kandy</a></li>
-          <li><a href="#">Galle</a></li>
-          <li><a href="#">Negombo</a></li>
-          <li><a href="#">Jaffna</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <ul class="footer-links">
-          <li><a href="#">Help Centre</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">Trust & Safety</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Explore</h4><ul class="footer-links"><li><a href="#">Office Spaces</a></li><li><a href="#">Event Halls</a></li><li><a href="#">Studios</a></li><li><a href="#">Meeting Rooms</a></li><li><a href="#">Kitchen Space</a></li></ul></div>
+      <div class="footer-col"><h4>Cities</h4><ul class="footer-links"><li><a href="#">Colombo</a></li><li><a href="#">Kandy</a></li><li><a href="#">Galle</a></li><li><a href="#">Negombo</a></li><li><a href="#">Jaffna</a></li></ul></div>
+      <div class="footer-col"><h4>Support</h4><ul class="footer-links"><li><a href="#">Help Centre</a></li><li><a href="#">Contact Us</a></li><li><a href="#">Trust & Safety</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Rent My Space LK. Made with ❤️ in <a href="#">Sri Lanka 🇱🇰</a></p>
-      <p style="color:rgba(255,255,255,0.2);">Colombo · Kandy · Galle · Negombo · Jaffna · Anuradhapura</p>
+      <p>© 2026 Rent My Space LK. Made with care in <a href="#">Sri Lanka 🇱🇰</a></p>
+      <p>Colombo · Kandy · Galle · Negombo · Jaffna</p>
     </div>
   </footer>
 
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contactModal" onclick="closeModal(event)">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      <div class="modal-images" id="modalImgMain"></div>
+      <div class="modal-img-thumbs" id="modalThumbs"></div>
+      <div class="modal-body">
+        <div class="modal-type" id="mType"></div>
+        <div class="modal-title" id="mTitle"></div>
+        <div class="modal-loc" id="mLoc"></div>
+        <div class="modal-price-row">
+          <div class="modal-price" id="mPrice"></div>
+          <div class="modal-badge" id="mBadge" style="display:none"></div>
+        </div>
+        <div class="modal-desc" id="mDesc"></div>
+        <div class="modal-contact-title">📞 Contact This Space</div>
+        <div class="contact-person" id="mPerson"></div>
+        <div class="modal-contact-grid" id="mContacts"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
   <script>
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // ── FIREBASE INIT ──
+  firebase.initializeApp({
+    apiKey: "AIzaSyDD0AaYbxSqlrqmNUuEKpxVu1NvubTNnng",
+    authDomain: "rent-my-space-lk.firebaseapp.com",
+    projectId: "rent-my-space-lk",
+    storageBucket: "rent-my-space-lk.firebasestorage.app",
+    messagingSenderId: "271748226472",
+    appId: "1:271748226472:web:35a493d282c8751eef519d"
+  });
+  const db = firebase.firestore();
 
-    document.querySelectorAll('.province-pill').forEach(pill => {
-      pill.addEventListener('click', function () {
-        document.querySelectorAll('.province-pill').forEach(p => p.classList.remove('active'));
-        this.classList.add('active');
-      });
-    });
+  // ── STATE ──
+  let allSpaces = [];
+  let activeFilter = '';
 
-    document.querySelectorAll('.space-fav').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        btn.textContent = btn.textContent.trim() === '🤍' ? '❤️' : '🤍';
-      });
-    });
+  // ── LOAD SPACES ──
+  async function loadSpaces() {
+    try {
+      const snap = await db.collection('spaces')
+        .where('active','==',true)
+        .orderBy('createdAt','desc')
+        .get();
+      allSpaces = [];
+      snap.forEach(d => allSpaces.push({ id: d.id, ...d.data() }));
+      updateCounts();
+      renderSpaces(allSpaces);
+    } catch(e) {
+      document.getElementById('spacesGrid').innerHTML =
+        `<div class="no-spaces"><p>Could not load spaces. Please try again later.</p></div>`;
+    }
+  }
+
+  function updateCounts() {
+    document.getElementById('totalCount').textContent = allSpaces.length + '+';
+    const count = (keyword) => allSpaces.filter(s => s.type && s.type.toLowerCase().includes(keyword.toLowerCase())).length;
+    document.getElementById('cnt-office').textContent = count('Office') + ' listings';
+    document.getElementById('cnt-event').textContent = count('Event') + ' listings';
+    document.getElementById('cnt-studio').textContent = (allSpaces.filter(s => s.type && s.type.toLowerCase().includes('studio')).length) + ' listings';
+    document.getElementById('cnt-meeting').textContent = count('Meeting') + ' listings';
+    document.getElementById('cnt-kitchen').textContent = count('Kitchen') + ' listings';
+  }
+
+  function renderSpaces(spaces) {
+    const grid = document.getElementById('spacesGrid');
+    if (!spaces.length) {
+      grid.innerHTML = `<div class="no-spaces"><p>No spaces found. Check back soon or <a href="admin.html" style="color:var(--accent)">add a listing</a>.</p></div>`;
+      return;
+    }
+    grid.innerHTML = spaces.map(s => {
+      const img = s.images && s.images[0] ? s.images[0] : null;
+      const badgeClass = s.badge ? (s.badge === 'New' ? 'badge-accent' : s.badge === 'Popular' || s.badge === 'Top Rated' ? 'badge-sage' : 'badge-dark') : '';
+      return `
+        <div class="space-card" onclick="openModal('${s.id}')">
+          <div class="space-img">
+            ${img
+              ? `<div class="space-img-bg" style="background-image:url('${img}')"></div>`
+              : `<div class="space-img-ph">🏠</div>`}
+            ${s.badge ? `<div class="space-badge ${badgeClass}">${s.badge}</div>` : ''}
+            <button class="space-fav" onclick="toggleFav(event,this)">🤍</button>
+          </div>
+          <div class="space-info">
+            <div class="space-type">${s.type || 'Space'}</div>
+            <div class="space-name">${s.name}</div>
+            <div class="space-loc">📍 ${s.city}${s.location ? ', ' + s.location : ''}</div>
+            <div class="space-footer">
+              <div class="space-price">Rs. ${Number(s.price).toLocaleString()} <small>/ ${s.priceUnit || 'hour'}</small></div>
+              <button class="contact-btn" onclick="openModal('${s.id}',event)">Contact →</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── FILTER ──
+  function filterByType(type) {
+    activeFilter = type;
+    document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+    event && event.target && event.target.classList.add('active');
+    if (!type) { document.querySelector('.type-pill').classList.add('active'); }
+    const filtered = type ? allSpaces.filter(s => s.type && s.type.toLowerCase().includes(type.toLowerCase())) : allSpaces;
+    renderSpaces(filtered);
+    document.getElementById('spacesGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function filterSpaces() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = allSpaces.filter(s =>
+      (s.name && s.name.toLowerCase().includes(q)) ||
+      (s.city && s.city.toLowerCase().includes(q)) ||
+      (s.type && s.type.toLowerCase().includes(q)) ||
+      (s.description && s.description.toLowerCase().includes(q))
+    );
+    renderSpaces(filtered);
+  }
+
+  // ── MODAL ──
+  let currentImages = [];
+  function openModal(id, e) {
+    if (e) e.stopPropagation();
+    const s = allSpaces.find(x => x.id === id);
+    if (!s) return;
+
+    currentImages = s.images && s.images.length ? s.images : [];
+
+    // Images
+    const mainEl = document.getElementById('modalImgMain');
+    const thumbsEl = document.getElementById('modalThumbs');
+    if (currentImages.length) {
+      mainEl.style.backgroundImage = `url('${currentImages[0]}')`;
+      mainEl.style.backgroundSize = 'cover';
+      mainEl.style.backgroundPosition = 'center';
+      thumbsEl.innerHTML = currentImages.map((u,i) =>
+        `<div class="modal-thumb${i===0?' active':''}" style="background-image:url('${u}')" onclick="switchImg(${i},this)"></div>`
+      ).join('');
+      thumbsEl.style.display = 'flex';
+    } else {
+      mainEl.style.background = 'var(--surface-2)';
+      mainEl.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🏠</div>';
+      thumbsEl.style.display = 'none';
+    }
+
+    // Details
+    document.getElementById('mType').textContent = s.type || '';
+    document.getElementById('mTitle').textContent = s.name || '';
+    document.getElementById('mLoc').textContent = '📍 ' + (s.city || '') + (s.location ? ', ' + s.location : '');
+    document.getElementById('mPrice').innerHTML = `Rs. ${Number(s.price).toLocaleString()} <small>/ ${s.priceUnit || 'hour'}</small>`;
+
+    const badgeEl = document.getElementById('mBadge');
+    if (s.badge) { badgeEl.textContent = s.badge; badgeEl.style.display = 'inline-block'; }
+    else badgeEl.style.display = 'none';
+
+    document.getElementById('mDesc').textContent = s.description || '';
+
+    // Contact person
+    const initials = (s.contactName || 'SP').split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+    document.getElementById('mPerson').innerHTML = `
+      <div class="contact-avatar">${initials}</div>
+      <div>
+        <div class="contact-person-name">${s.contactName || 'Space Owner'}</div>
+        <div class="contact-person-role">Contact Person</div>
+      </div>`;
+
+    // Contact links
+    const contacts = [];
+    if (s.contactMobile) contacts.push(`<a class="contact-item" href="tel:${s.contactMobile}"><div class="contact-item-icon">📱</div><div><div class="contact-item-label">Call</div><div class="contact-item-value">${s.contactMobile}</div></div></a>`);
+    if (s.contactWhatsapp) contacts.push(`<a class="contact-item" href="${s.contactWhatsapp}" target="_blank"><div class="contact-item-icon">💬</div><div><div class="contact-item-label">WhatsApp</div><div class="contact-item-value">Chat on WhatsApp</div></div></a>`);
+    if (s.contactEmail) contacts.push(`<a class="contact-item" href="mailto:${s.contactEmail}"><div class="contact-item-icon">✉️</div><div><div class="contact-item-label">Email</div><div class="contact-item-value">${s.contactEmail}</div></div></a>`);
+    document.getElementById('mContacts').innerHTML = contacts.join('');
+
+    document.getElementById('contactModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function switchImg(i, el) {
+    document.getElementById('modalImgMain').style.backgroundImage = `url('${currentImages[i]}')`;
+    document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('contactModal')) closeModalDirect();
+  }
+  function closeModalDirect() {
+    document.getElementById('contactModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on ESC
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+  // ── NAV SCROLL ──
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20));
+
+  // ── REVEAL ON SCROLL ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── FAV TOGGLE ──
+  function toggleFav(e, btn) {
+    e.stopPropagation();
+    btn.textContent = btn.textContent.trim() === '🤍' ? '❤️' : '🤍';
+  }
+
+  // ── INIT ──
+  loadSpaces();
   </script>
 </body>
 </html>
