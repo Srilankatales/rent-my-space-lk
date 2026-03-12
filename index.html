@@ -214,7 +214,7 @@
     .f-logo em { font-style: italic; color: var(--sage-l); }
     .f-desc { font-size: 0.78rem; font-weight: 300; line-height: 1.85; color: rgba(255,255,255,0.32); max-width: 250px; margin-bottom: 26px; }
     .f-socials { display: flex; gap: 8px; }
-    .fsoc { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.35); transition: all 0.2s; }
+    .fsoc { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.35); text-decoration: none; transition: all 0.2s; }
     .fsoc:hover { border-color: var(--sage-l); color: var(--sage-l); }
     .f-col h4 { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
     .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -224,7 +224,7 @@
     .f-bottom p { font-size: 0.7rem; font-weight: 300; color: rgba(255,255,255,0.22); }
     .f-bottom a { color: var(--sage-l); text-decoration: none; }
 
-    /* MODAL */
+    /* SPACE MODAL */
     .modal-overlay { position: fixed; inset: 0; background: rgba(20,20,18,0.72); z-index: 500; display: none; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(6px); }
     .modal-overlay.open { display: flex; }
     .modal-box { background: var(--white); max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(20,20,18,0.3); animation: mslide 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
@@ -258,6 +258,28 @@
     .c-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
     .c-val { font-size: 0.8rem; font-weight: 500; color: var(--ink); }
 
+    /* ENQUIRY MODAL */
+    .enq-box { background: var(--white); max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(20,20,18,0.3); animation: mslide 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .enq-head { padding: 32px 36px 24px; border-bottom: 1px solid var(--border); position: relative; }
+    .enq-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
+    .enq-head h2 em { font-style: italic; color: var(--sage); }
+    .enq-head p { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+    .enq-body { padding: 28px 36px 36px; }
+    .enq-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .enq-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .enq-group.half { margin-bottom: 0; }
+    .enq-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+    .enq-label .req { color: var(--terra); }
+    .enq-input, .enq-select, .enq-textarea { padding: 11px 14px; border: 1px solid var(--border); background: var(--cream); font-family: 'Jost', sans-serif; font-size: 0.88rem; color: var(--ink); outline: none; width: 100%; transition: border-color 0.2s; }
+    .enq-input:focus, .enq-select:focus, .enq-textarea:focus { border-color: var(--sage); }
+    .enq-textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
+    .enq-submit { width: 100%; background: var(--sage); color: var(--white); border: none; padding: 14px; font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.3s; margin-top: 8px; }
+    .enq-submit:hover { background: var(--sage-d); }
+    .enq-submit:disabled { opacity: 0.5; }
+    .enq-success { text-align: center; padding: 40px 20px; }
+    .enq-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--ink); margin-bottom: 10px; }
+    .enq-success p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+
     /* REVEAL */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
@@ -289,6 +311,7 @@
       .how-sub { text-align: left; max-width: none; }
       .steps { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .enq-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -298,27 +321,27 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-logo">Rent My Space <em>LK</em></a>
+  <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Rent My Space <em>LK</em></a>
   <ul class="nav-links">
-    <li><a href="#spacesAnchor">Spaces</a></li>
-    <li><a href="#">Cities</a></li>
-    <li><a href="#">How It Works</a></li>
-    <li><a href="#">List Your Space</a></li>
-    <li><a href="#" class="nav-cta">Get Started</a></li>
+    <li><a href="#spacesAnchor" onclick="scrollTo('spacesAnchor');return false;">Spaces</a></li>
+    <li><a href="#citiesAnchor" onclick="scrollTo('citiesAnchor');return false;">Cities</a></li>
+    <li><a href="#howAnchor" onclick="scrollTo('howAnchor');return false;">How It Works</a></li>
+    <li><a href="#" onclick="openEnquiry();return false;">List Your Space</a></li>
+    <li><a href="#spacesAnchor" onclick="scrollTo('spacesAnchor');return false;" class="nav-cta">Get Started</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="homeAnchor">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-tag"><span class="hero-tag-line"></span>Sri Lanka's Space Rental Platform<span class="hero-tag-line"></span></div>
-    <h1>Find the space where<br/>ideas <em>come alive.</em></h1>
-    <p class="hero-sub">Offices, studios, event halls and creative spaces — curated across Sri Lanka. Book by the hour, day, or month.</p>
+    <div class="hero-tag"><span class="hero-tag-line"></span><span id="heroTagline">Sri Lanka's Space Rental Platform</span><span class="hero-tag-line"></span></div>
+    <h1 id="heroHeading">Find the space where<br/>ideas <em>come alive.</em></h1>
+    <p class="hero-sub" id="heroSub">Offices, studios, event halls and creative spaces — curated across Sri Lanka. Book by the hour, day, or month.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('spacesAnchor').scrollIntoView({behavior:'smooth'})">Browse Spaces</button>
-      <button class="btn-ghost" onclick="document.querySelector('.how').scrollIntoView({behavior:'smooth'})">How It Works</button>
+      <button class="btn-primary" onclick="scrollTo('spacesAnchor')">Browse Spaces</button>
+      <button class="btn-ghost" onclick="scrollTo('howAnchor')">How It Works</button>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div>Scroll</div>
@@ -335,18 +358,18 @@
 </div>
 
 <!-- INTRO -->
-<div style="background:var(--white)">
+<div style="background:var(--white)" id="aboutAnchor">
 <div class="intro reveal">
   <div class="intro-left">
     <div class="sec-label"><span class="sec-num">01</span>About</div>
     <h2 class="intro-h">Spaces built<br/>for <em>every</em><br/>ambition.</h2>
   </div>
   <div>
-    <p class="intro-body">From intimate podcast studios in Rajagiriya to grand event halls in Galle Fort — Rent My Space LK brings together Sri Lanka's finest rental spaces on one seamless platform. Whether you're a solo creative, a growing startup, or planning your next big event, you'll find a space that fits exactly how you work.</p>
+    <p class="intro-body" id="introBody">From intimate podcast studios in Rajagiriya to grand event halls in Galle Fort — Rent My Space LK brings together Sri Lanka's finest rental spaces on one seamless platform. Whether you're a solo creative, a growing startup, or planning your next big event, you'll find a space that fits exactly how you work.</p>
     <div class="stats-row">
       <div class="stat"><div class="stat-n" id="totalCount">—</div><div class="stat-l">Spaces</div></div>
-      <div class="stat"><div class="stat-n">25</div><div class="stat-l">Cities</div></div>
-      <div class="stat"><div class="stat-n">8,500+</div><div class="stat-l">Renters</div></div>
+      <div class="stat"><div class="stat-n" id="statCities">25</div><div class="stat-l">Cities</div></div>
+      <div class="stat"><div class="stat-n" id="statRenters">8,500+</div><div class="stat-l">Renters</div></div>
     </div>
   </div>
 </div>
@@ -359,7 +382,7 @@
       <div class="sec-label"><span class="sec-num">02</span>Available Spaces</div>
       <h2 class="spaces-h">Curated <em>spaces</em><br/>across the island.</h2>
     </div>
-    <a href="#" class="view-all-link">View All →</a>
+    <a href="#" class="view-all-link" onclick="showAll();return false;">View All →</a>
   </div>
   <div class="filter-row reveal">
     <button class="fpill active" onclick="filterByType('',this)">All</button>
@@ -376,7 +399,7 @@
 </section>
 
 <!-- HOW -->
-<section class="how reveal">
+<section class="how reveal" id="howAnchor">
   <div class="how-inner">
     <div class="how-top">
       <h2 class="how-h">Simple from<br/><em>start to finish.</em></h2>
@@ -397,41 +420,41 @@
     <div class="sec-label"><span class="sec-num">03</span>Browse by Type</div>
     <h2 class="cats-h">Every space<br/>you <em>need.</em></h2>
     <div class="cats-list">
-      <div class="cat-card" onclick="filterByType('Event',null)"><div class="cat-icon">🎉</div><div class="cat-name">Events</div><div class="cat-cnt" id="cnt-event">— listings</div></div>
-      <div class="cat-card" onclick="filterByType('Hangout',null)"><div class="cat-icon">☕</div><div class="cat-name">Hangout</div><div class="cat-cnt" id="cnt-hangout">— listings</div></div>
-      <div class="cat-card" onclick="filterByType('Meeting',null)"><div class="cat-icon">📋</div><div class="cat-name">Meeting Rooms</div><div class="cat-cnt" id="cnt-meeting">— listings</div></div>
-      <div class="cat-card" onclick="filterByType('Office',null)"><div class="cat-icon">🏢</div><div class="cat-name">Office</div><div class="cat-cnt" id="cnt-office">— listings</div></div>
-      <div class="cat-card" onclick="filterByType('Studio',null)"><div class="cat-icon">🎨</div><div class="cat-name">Studios</div><div class="cat-cnt" id="cnt-studio">— listings</div></div>
-      <div class="cat-card" onclick="filterByType('Yoga',null)"><div class="cat-icon">🧘</div><div class="cat-name">Yoga / Meditation</div><div class="cat-cnt" id="cnt-yoga">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Event',null);scrollTo('spacesAnchor')"><div class="cat-icon">🎉</div><div class="cat-name">Events</div><div class="cat-cnt" id="cnt-event">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Hangout',null);scrollTo('spacesAnchor')"><div class="cat-icon">☕</div><div class="cat-name">Hangout</div><div class="cat-cnt" id="cnt-hangout">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Meeting',null);scrollTo('spacesAnchor')"><div class="cat-icon">📋</div><div class="cat-name">Meeting Rooms</div><div class="cat-cnt" id="cnt-meeting">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Office',null);scrollTo('spacesAnchor')"><div class="cat-icon">🏢</div><div class="cat-name">Office</div><div class="cat-cnt" id="cnt-office">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Studio',null);scrollTo('spacesAnchor')"><div class="cat-icon">🎨</div><div class="cat-name">Studios</div><div class="cat-cnt" id="cnt-studio">— listings</div></div>
+      <div class="cat-card" onclick="filterByType('Yoga',null);scrollTo('spacesAnchor')"><div class="cat-icon">🧘</div><div class="cat-name">Yoga / Meditation</div><div class="cat-cnt" id="cnt-yoga">— listings</div></div>
     </div>
   </div>
 </section>
 
 <!-- CITIES -->
-<section class="cities reveal">
+<section class="cities reveal" id="citiesAnchor">
   <div class="cities-inner">
     <div class="cities-top">
       <div><div class="sec-label"><span class="sec-num">04</span>Explore Cities</div><h2 class="cities-h">Spaces across<br/><em>Sri Lanka.</em></h2></div>
-      <a href="#" class="view-all-link">All Cities →</a>
+      <a href="#" class="view-all-link" onclick="showAll();scrollTo('spacesAnchor');return false;">All Spaces →</a>
     </div>
     <div class="cities-grid">
-      <div class="city-card"><div class="city-bg cb1"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name" style="font-size:2.4rem">Colombo</div><div class="city-prov">Western Province</div></div></div>
-      <div class="city-card"><div class="city-bg cb2"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Kandy</div><div class="city-prov">Central Province</div></div></div>
-      <div class="city-card"><div class="city-bg cb4"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Negombo</div><div class="city-prov">Western Province</div></div></div>
-      <div class="city-card"><div class="city-bg cb3"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Galle</div><div class="city-prov">Southern Province</div></div></div>
-      <div class="city-card"><div class="city-bg cb5"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Jaffna</div><div class="city-prov">Northern Province</div></div></div>
+      <div class="city-card" onclick="filterByCity('Colombo')"><div class="city-bg cb1"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name" style="font-size:2.4rem">Colombo</div><div class="city-prov">Western Province</div></div></div>
+      <div class="city-card" onclick="filterByCity('Kandy')"><div class="city-bg cb2"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Kandy</div><div class="city-prov">Central Province</div></div></div>
+      <div class="city-card" onclick="filterByCity('Negombo')"><div class="city-bg cb4"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Negombo</div><div class="city-prov">Western Province</div></div></div>
+      <div class="city-card" onclick="filterByCity('Galle')"><div class="city-bg cb3"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Galle</div><div class="city-prov">Southern Province</div></div></div>
+      <div class="city-card" onclick="filterByCity('Jaffna')"><div class="city-bg cb5"></div><div class="city-overlay"></div><div class="city-info"><div class="city-name">Jaffna</div><div class="city-prov">Northern Province</div></div></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="testi reveal">
+<section class="testi reveal" id="testiAnchor">
   <div class="testi-inner">
     <div class="testi-top">
       <div><div class="sec-label"><span class="sec-num">05</span>Stories</div><h2 class="testi-h">Loved by renters<br/><em>island-wide.</em></h2></div>
       <p class="testi-intro">From Colombo creatives to Kandy event planners — here's what people say about finding their perfect space through Rent My Space LK.</p>
     </div>
-    <div class="testi-grid">
+    <div class="testi-grid" id="testiGrid">
       <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"Found an amazing photography studio in Nugegoda within minutes. The booking process was seamless and the space was exactly as described."</p><div class="tc-author"><div class="tc-av av1">DP</div><div><div class="tc-name">Dinesh Perera</div><div class="tc-role">Freelance Photographer, Colombo</div></div></div></div>
       <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"We hosted our startup's product launch at a beautiful Galle event hall. Incredibly easy to organise — the space was absolutely stunning."</p><div class="tc-author"><div class="tc-av av2">AJ</div><div><div class="tc-name">Anushka Jayawardena</div><div class="tc-role">Co-Founder, TechStart LK</div></div></div></div>
       <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">"As a space owner, listing my property was simple. The platform brought consistent bookings and the dashboard is clean and easy to manage."</p><div class="tc-author"><div class="tc-av av3">RF</div><div><div class="tc-name">Roshan Fernando</div><div class="tc-role">Space Owner, Kandy</div></div></div></div>
@@ -445,24 +468,56 @@
   <div class="cta-content">
     <h2>Own a space?<br/><em>Start earning today.</em></h2>
     <p>List your office, studio, or event hall for free and reach thousands of renters across Sri Lanka.</p>
-    <div class="cta-btns"><button class="btn-primary">List Your Space</button><button class="btn-ghost">Learn More</button></div>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="openEnquiry()">List Your Space</button>
+      <button class="btn-ghost" onclick="scrollTo('howAnchor')">Learn More</button>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contactAnchor">
   <div class="footer-top">
-    <div><a href="#" class="f-logo">Rent My Space <em>LK</em></a><p class="f-desc">Sri Lanka's platform for discovering and booking unique spaces — offices, studios, event halls and more, island-wide.</p><div class="f-socials"><div class="fsoc">f</div><div class="fsoc">in</div><div class="fsoc">ig</div><div class="fsoc">yt</div></div></div>
-    <div class="f-col"><h4>Explore</h4><ul class="f-links"><li><a href="#">Office Spaces</a></li><li><a href="#">Event Halls</a></li><li><a href="#">Studios</a></li><li><a href="#">Meeting Rooms</a></li><li><a href="#">Kitchens</a></li></ul></div>
-    <div class="f-col"><h4>Cities</h4><ul class="f-links"><li><a href="#">Colombo</a></li><li><a href="#">Kandy</a></li><li><a href="#">Galle</a></li><li><a href="#">Negombo</a></li><li><a href="#">Jaffna</a></li></ul></div>
-    <div class="f-col"><h4>Company</h4><ul class="f-links"><li><a href="#">About Us</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li></ul></div>
+    <div>
+      <a href="#" class="f-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Rent My Space <em>LK</em></a>
+      <p class="f-desc" id="footerDesc">Sri Lanka's platform for discovering and booking unique spaces — offices, studios, event halls and more, island-wide.</p>
+      <div class="f-socials">
+        <a class="fsoc" id="soc-fb" href="#" target="_blank" title="Facebook">f</a>
+        <a class="fsoc" id="soc-li" href="#" target="_blank" title="LinkedIn">in</a>
+        <a class="fsoc" id="soc-ig" href="#" target="_blank" title="Instagram">ig</a>
+        <a class="fsoc" id="soc-yt" href="#" target="_blank" title="YouTube">yt</a>
+      </div>
+    </div>
+    <div class="f-col"><h4>Explore</h4><ul class="f-links">
+      <li><a href="#" onclick="filterByType('Office',null);scrollTo('spacesAnchor');return false;">Office Spaces</a></li>
+      <li><a href="#" onclick="filterByType('Event',null);scrollTo('spacesAnchor');return false;">Events</a></li>
+      <li><a href="#" onclick="filterByType('Studio',null);scrollTo('spacesAnchor');return false;">Studios</a></li>
+      <li><a href="#" onclick="filterByType('Meeting',null);scrollTo('spacesAnchor');return false;">Meeting Rooms</a></li>
+      <li><a href="#" onclick="filterByType('Yoga',null);scrollTo('spacesAnchor');return false;">Yoga / Meditation</a></li>
+    </ul></div>
+    <div class="f-col"><h4>Cities</h4><ul class="f-links">
+      <li><a href="#" onclick="filterByCity('Colombo');return false;">Colombo</a></li>
+      <li><a href="#" onclick="filterByCity('Kandy');return false;">Kandy</a></li>
+      <li><a href="#" onclick="filterByCity('Galle');return false;">Galle</a></li>
+      <li><a href="#" onclick="filterByCity('Negombo');return false;">Negombo</a></li>
+      <li><a href="#" onclick="filterByCity('Jaffna');return false;">Jaffna</a></li>
+    </ul></div>
+    <div class="f-col"><h4>Company</h4><ul class="f-links">
+      <li><a href="#" onclick="scrollTo('aboutAnchor');return false;">About Us</a></li>
+      <li><a href="#" onclick="openEnquiry();return false;">List Your Space</a></li>
+      <li><a href="#" onclick="scrollTo('howAnchor');return false;">How It Works</a></li>
+      <li><a href="#" onclick="scrollTo('contactAnchor');return false;">Contact</a></li>
+    </ul></div>
   </div>
-  <div class="f-bottom"><p>© 2026 Rent My Space LK. Made with care in <a href="#">Sri Lanka 🇱🇰</a></p><p>Colombo · Kandy · Galle · Negombo · Jaffna</p></div>
+  <div class="f-bottom">
+    <p>© 2026 Rent My Space LK. Made with care in <a href="#">Sri Lanka 🇱🇰</a></p>
+    <p>Colombo · Kandy · Galle · Negombo · Jaffna</p>
+  </div>
 </footer>
 
-<!-- MODAL -->
+<!-- SPACE DETAIL MODAL -->
 <div class="modal-overlay" id="contactModal" onclick="closeModal(event)">
-  <div class="modal-box" id="modalBox">
+  <div class="modal-box" id="modalBox" style="position:relative">
     <button class="m-close" onclick="closeModalDirect()">✕</button>
     <div class="m-img"><div id="mImgMain" class="m-img-main"></div></div>
     <div class="m-thumbs" id="mThumbs"></div>
@@ -475,6 +530,52 @@
       <div class="m-clabel">Contact this space</div>
       <div class="m-person" id="mPerson"></div>
       <div class="m-contacts" id="mContacts"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIST YOUR SPACE ENQUIRY MODAL -->
+<div class="modal-overlay" id="enquiryModal" onclick="closeEnquiryBg(event)">
+  <div class="enq-box" id="enqBox">
+    <div class="enq-head">
+      <button class="m-close" style="position:absolute;top:18px;right:18px" onclick="closeEnquiry()">✕</button>
+      <h2>List your <em>space</em></h2>
+      <p>Tell us about your space and we'll get in touch within 24 hours.</p>
+    </div>
+    <div class="enq-body" id="enqFormWrap">
+      <div class="enq-row">
+        <div class="enq-group half">
+          <label class="enq-label">Full Name <span class="req">*</span></label>
+          <input class="enq-input" id="enq-name" placeholder="Your name" type="text"/>
+        </div>
+        <div class="enq-group half">
+          <label class="enq-label">Phone / WhatsApp <span class="req">*</span></label>
+          <input class="enq-input" id="enq-phone" placeholder="07X XXX XXXX" type="tel"/>
+        </div>
+      </div>
+      <div class="enq-group">
+        <label class="enq-label">Email Address</label>
+        <input class="enq-input" id="enq-email" placeholder="you@example.com" type="email"/>
+      </div>
+      <div class="enq-row">
+        <div class="enq-group half">
+          <label class="enq-label">City <span class="req">*</span></label>
+          <input class="enq-input" id="enq-city" placeholder="Colombo, Kandy…" type="text"/>
+        </div>
+        <div class="enq-group half">
+          <label class="enq-label">Space Type <span class="req">*</span></label>
+          <select class="enq-select" id="enq-type">
+            <option value="">Select type…</option>
+            <option>Events</option><option>Hangout</option><option>Meeting Room</option>
+            <option>Office</option><option>Studio</option><option>Yoga / Meditation</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="enq-group">
+        <label class="enq-label">Tell us about your space</label>
+        <textarea class="enq-textarea" id="enq-desc" placeholder="Size, location, amenities, availability…"></textarea>
+      </div>
+      <button class="enq-submit" id="enqSubmitBtn" onclick="submitEnquiry()">Send Enquiry →</button>
     </div>
   </div>
 </div>
@@ -493,7 +594,10 @@ firebase.initializeApp({
 const db = firebase.firestore();
 let allSpaces = [], currentImages = [];
 
-// Cursor
+// ── HELPERS ──
+function scrollTo(id) { const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); }
+
+// ── CURSOR ──
 const cur = document.getElementById('cursor');
 document.addEventListener('mousemove', e => { cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; });
 document.querySelectorAll('a,button,.space-card,.cat-card,.city-card').forEach(el => {
@@ -501,14 +605,65 @@ document.querySelectorAll('a,button,.space-card,.cat-card,.city-card').forEach(e
   el.addEventListener('mouseleave', () => cur.classList.remove('expand'));
 });
 
-// Nav
+// ── NAV ──
 window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60));
 
-// Reveal
+// ── REVEAL ──
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// Load spaces
+// ── LOAD SITE SETTINGS ──
+async function loadSiteSettings() {
+  try {
+    const doc = await db.collection('settings').doc('site').get();
+    if (doc.exists) {
+      const d = doc.data();
+      if (d.tagline) document.getElementById('heroTagline').textContent = d.tagline;
+      if (d.heroSub) document.getElementById('heroSub').textContent = d.heroSub;
+      if (d.introBody) document.getElementById('introBody').textContent = d.introBody;
+      if (d.statCities) document.getElementById('statCities').textContent = d.statCities;
+      if (d.statRenters) document.getElementById('statRenters').textContent = d.statRenters;
+      if (d.footerDesc) document.getElementById('footerDesc').textContent = d.footerDesc;
+    }
+  } catch(e) { /* use defaults */ }
+
+  // Load social links
+  try {
+    const soc = await db.collection('settings').doc('socials').get();
+    if (soc.exists) {
+      const s = soc.data();
+      if (s.facebook) document.getElementById('soc-fb').href = s.facebook;
+      if (s.linkedin) document.getElementById('soc-li').href = s.linkedin;
+      if (s.instagram) document.getElementById('soc-ig').href = s.instagram;
+      if (s.youtube) document.getElementById('soc-yt').href = s.youtube;
+    }
+  } catch(e) {}
+}
+
+// ── LOAD TESTIMONIALS ──
+async function loadTestimonials() {
+  try {
+    const snap = await db.collection('testimonials').orderBy('order','asc').get();
+    if (snap.empty) return;
+    const avColors = ['av1','av2','av3','av1','av2'];
+    const html = snap.docs.map((d,i) => {
+      const t = d.data();
+      const stars = '★'.repeat(t.stars||5);
+      const initials = (t.name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+      return `<div class="tc">
+        <div class="tc-stars">${stars}</div>
+        <p class="tc-text">"${t.text}"</p>
+        <div class="tc-author">
+          <div class="tc-av ${avColors[i%5]}">${initials}</div>
+          <div><div class="tc-name">${t.name}</div><div class="tc-role">${t.role||''}</div></div>
+        </div>
+      </div>`;
+    }).join('');
+    document.getElementById('testiGrid').innerHTML = html;
+  } catch(e) { /* keep default hardcoded testimonials */ }
+}
+
+// ── LOAD SPACES ──
 async function loadSpaces() {
   try {
     const snap = await db.collection('spaces').where('active','==',true).orderBy('createdAt','desc').get();
@@ -554,11 +709,26 @@ function renderSpaces(list) {
   }).join('');
 }
 
+// ── FILTERS ──
+function showAll() {
+  document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active'));
+  document.querySelector('.fpill').classList.add('active');
+  renderSpaces(allSpaces);
+  scrollTo('spacesAnchor');
+}
+
 function filterByType(type, btn) {
   if (btn) { document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active')); btn.classList.add('active'); }
   const filtered = type ? allSpaces.filter(s => s.type && s.type.toLowerCase().includes(type.toLowerCase())) : allSpaces;
   renderSpaces(filtered);
-  document.getElementById('spacesAnchor').scrollIntoView({behavior:'smooth'});
+}
+
+function filterByCity(city) {
+  document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active'));
+  document.querySelector('.fpill').classList.add('active');
+  const filtered = allSpaces.filter(s => s.city && s.city.toLowerCase().includes(city.toLowerCase()));
+  renderSpaces(filtered);
+  scrollTo('spacesAnchor');
 }
 
 function doSearch() {
@@ -569,9 +739,10 @@ function doSearch() {
     (!type || (s.type&&s.type.toLowerCase().includes(type)))
   );
   renderSpaces(filtered);
-  document.getElementById('spacesAnchor').scrollIntoView({behavior:'smooth'});
+  scrollTo('spacesAnchor');
 }
 
+// ── SPACE MODAL ──
 function openModal(id, e) {
   if (e) e.stopPropagation();
   const s = allSpaces.find(x => x.id === id); if (!s) return;
@@ -608,9 +779,63 @@ function switchImg(i, el) {
 }
 function closeModal(e) { if (e.target===document.getElementById('contactModal')) closeModalDirect(); }
 function closeModalDirect() { document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow=''; }
-document.addEventListener('keydown', e => { if (e.key==='Escape') closeModalDirect(); });
+
+// ── ENQUIRY MODAL ──
+function openEnquiry() {
+  document.getElementById('enquiryModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('enqFormWrap').innerHTML = document.getElementById('enqFormWrap').innerHTML; // reset
+  // Re-render form
+  document.getElementById('enqFormWrap').innerHTML = `
+    <div class="enq-row">
+      <div class="enq-group half"><label class="enq-label">Full Name <span class="req">*</span></label><input class="enq-input" id="enq-name" placeholder="Your name" type="text"/></div>
+      <div class="enq-group half"><label class="enq-label">Phone / WhatsApp <span class="req">*</span></label><input class="enq-input" id="enq-phone" placeholder="07X XXX XXXX" type="tel"/></div>
+    </div>
+    <div class="enq-group"><label class="enq-label">Email Address</label><input class="enq-input" id="enq-email" placeholder="you@example.com" type="email"/></div>
+    <div class="enq-row">
+      <div class="enq-group half"><label class="enq-label">City <span class="req">*</span></label><input class="enq-input" id="enq-city" placeholder="Colombo, Kandy…" type="text"/></div>
+      <div class="enq-group half"><label class="enq-label">Space Type <span class="req">*</span></label>
+        <select class="enq-select" id="enq-type"><option value="">Select type…</option><option>Events</option><option>Hangout</option><option>Meeting Room</option><option>Office</option><option>Studio</option><option>Yoga / Meditation</option><option>Other</option></select>
+      </div>
+    </div>
+    <div class="enq-group"><label class="enq-label">Tell us about your space</label><textarea class="enq-textarea" id="enq-desc" placeholder="Size, location, amenities, availability…"></textarea></div>
+    <button class="enq-submit" id="enqSubmitBtn" onclick="submitEnquiry()">Send Enquiry →</button>`;
+}
+function closeEnquiry() { document.getElementById('enquiryModal').classList.remove('open'); document.body.style.overflow=''; }
+function closeEnquiryBg(e) { if (e.target===document.getElementById('enquiryModal')) closeEnquiry(); }
+
+async function submitEnquiry() {
+  const name  = document.getElementById('enq-name').value.trim();
+  const phone = document.getElementById('enq-phone').value.trim();
+  const city  = document.getElementById('enq-city').value.trim();
+  const type  = document.getElementById('enq-type').value;
+  if (!name || !phone || !city || !type) { alert('Please fill in all required fields.'); return; }
+  const btn = document.getElementById('enqSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    await db.collection('enquiries').add({
+      name, phone,
+      email: document.getElementById('enq-email').value.trim(),
+      city, type,
+      message: document.getElementById('enq-desc').value.trim(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      read: false
+    });
+    document.getElementById('enqFormWrap').innerHTML = `<div class="enq-success"><div style="font-size:3rem;margin-bottom:16px">🎉</div><h3>Enquiry sent!</h3><p>Thank you, ${name}. We'll review your space and get back to you within 24 hours.</p></div>`;
+  } catch(e) {
+    btn.disabled=false; btn.textContent='Send Enquiry →';
+    alert('Something went wrong. Please try again.');
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape') { closeModalDirect(); closeEnquiry(); }
+});
 function toggleFav(e, btn) { e.stopPropagation(); btn.textContent = btn.textContent.trim()==='🤍'?'❤️':'🤍'; }
 
+// ── INIT ──
+loadSiteSettings();
+loadTestimonials();
 loadSpaces();
 </script>
 </body>

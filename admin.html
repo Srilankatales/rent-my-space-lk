@@ -146,6 +146,48 @@
     .toast.ok { background: var(--sage); }
     .toast.err { background: var(--error); }
 
+    /* Settings / Socials / Testimonials / Enquiries */
+    .settings-grid { display: grid; gap: 18px; max-width: 760px; }
+    .settings-sec { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 26px; }
+    .settings-sec-title { font-size: 0.78rem; font-weight: 800; color: var(--ink); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+    .settings-save-row { display: flex; justify-content: flex-end; padding-top: 6px; }
+    .soc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .soc-item { display: flex; align-items: center; gap: 12px; }
+    .soc-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .testi-list { display: grid; gap: 12px; }
+    .testi-item { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 18px; display: flex; gap: 16px; align-items: flex-start; }
+    .testi-item-body { flex: 1; min-width: 0; }
+    .testi-item-text { font-size: 0.84rem; color: var(--ink-2); line-height: 1.55; margin-bottom: 6px; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .testi-item-meta { font-size: 0.72rem; font-weight: 700; color: var(--ink); }
+    .testi-item-role { font-size: 0.68rem; color: var(--muted); }
+    .testi-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .ti-btn { padding: 6px 12px; border-radius: 7px; border: 1.5px solid var(--border); background: transparent; cursor: pointer; font-family: 'Figtree', sans-serif; font-size: 0.72rem; font-weight: 700; transition: all 0.2s; }
+    .ti-edit:hover { border-color: var(--ink); background: var(--ink); color: var(--white); }
+    .ti-del { color: var(--error); }
+    .ti-del:hover { border-color: var(--error); background: var(--error); color: var(--white); }
+    .stars-row { display: flex; gap: 6px; margin-bottom: 14px; }
+    .star-btn { font-size: 1.2rem; background: none; border: none; cursor: pointer; opacity: 0.3; transition: opacity 0.15s, transform 0.15s; }
+    .star-btn.on { opacity: 1; }
+    .star-btn:hover { transform: scale(1.2); }
+    .enq-list { display: grid; gap: 10px; }
+    .enq-item { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 18px 20px; position: relative; transition: box-shadow 0.2s; }
+    .enq-item:hover { box-shadow: 0 4px 20px rgba(28,25,23,0.07); }
+    .enq-item.unread { border-left: 3px solid var(--accent); }
+    .enq-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .enq-item-name { font-size: 0.9rem; font-weight: 700; color: var(--ink); }
+    .enq-item-badge { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 30px; }
+    .enq-badge-new { background: #FEF3C7; color: #92400E; }
+    .enq-badge-read { background: var(--surface-2); color: var(--muted); }
+    .enq-item-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.74rem; color: var(--muted); margin-bottom: 8px; }
+    .enq-item-meta span { display: flex; align-items: center; gap: 4px; }
+    .enq-item-msg { font-size: 0.8rem; color: var(--ink-2); line-height: 1.6; padding: 10px 12px; background: var(--surface); border-radius: 8px; margin-bottom: 10px; }
+    .enq-item-actions { display: flex; gap: 8px; }
+    .enq-contact-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; cursor: pointer; font-family: 'Figtree', sans-serif; font-size: 0.75rem; font-weight: 700; text-decoration: none; color: var(--ink-2); transition: all 0.2s; }
+    .enq-contact-btn:hover { border-color: var(--sage); color: var(--sage); }
+    .enq-del-btn { padding: 7px 14px; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; cursor: pointer; font-family: 'Figtree', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--error); transition: all 0.2s; margin-left: auto; }
+    .enq-del-btn:hover { border-color: var(--error); background: var(--error); color: var(--white); }
+    .badge-count { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; border-radius: 9px; background: var(--accent); color: var(--white); font-size: 0.6rem; font-weight: 800; padding: 0 4px; margin-left: 4px; }
+
     /* Confirm Modal */
     .overlay { position: fixed; inset: 0; background: rgba(28,25,23,0.5); display: none; align-items: center; justify-content: center; z-index: 200; }
     .overlay.show { display: flex; }
@@ -206,6 +248,12 @@
       <div class="sb-label">Spaces</div>
       <button class="sb-btn active" id="btn-list" onclick="showListings()"><span>🏠</span> All Listings</button>
       <button class="sb-btn" id="btn-add" onclick="showAddForm()"><span>➕</span> Add New Space</button>
+      <div class="sb-label">Website</div>
+      <button class="sb-btn" id="btn-settings" onclick="showSettings()"><span>⚙️</span> Site Settings</button>
+      <button class="sb-btn" id="btn-testi" onclick="showTestimonials()"><span>💬</span> Testimonials</button>
+      <button class="sb-btn" id="btn-socials" onclick="showSocials()"><span>📱</span> Social Links</button>
+      <div class="sb-label">Enquiries</div>
+      <button class="sb-btn" id="btn-enq" onclick="showEnquiries()"><span>📥</span> List Requests <span id="enqBadge"></span></button>
     </aside>
 
     <main class="main">
@@ -359,6 +407,103 @@
         </div>
       </div>
 
+      <!-- SITE SETTINGS VIEW -->
+      <div id="settingsView" style="display:none">
+        <div class="pg-header"><div><div class="pg-title">Site Settings</div><div class="pg-sub">Edit text and content shown across the website</div></div></div>
+        <div class="settings-grid">
+          <div class="settings-sec">
+            <div class="settings-sec-title">🌟 Hero Section</div>
+            <div style="display:grid;gap:14px">
+              <div class="f-group"><label class="f-label">Tag Line <small style="color:var(--muted);font-weight:400">(small text above the heading)</small></label><input id="st-tagline" class="f-input" type="text" placeholder="Sri Lanka's Space Rental Platform"/></div>
+              <div class="f-group"><label class="f-label">Hero Sub-text</label><textarea id="st-herosub" class="f-textarea" style="min-height:70px" placeholder="Offices, studios, event halls…"></textarea></div>
+            </div>
+          </div>
+          <div class="settings-sec">
+            <div class="settings-sec-title">📊 Stats Bar</div>
+            <div class="f-row">
+              <div class="f-group"><label class="f-label">Cities Count</label><input id="st-cities" class="f-input" type="text" placeholder="25"/></div>
+              <div class="f-group"><label class="f-label">Renters Count</label><input id="st-renters" class="f-input" type="text" placeholder="8,500+"/></div>
+            </div>
+          </div>
+          <div class="settings-sec">
+            <div class="settings-sec-title">📝 About Section</div>
+            <div class="f-group"><label class="f-label">Body Text</label><textarea id="st-introbody" class="f-textarea" placeholder="From intimate podcast studios…"></textarea></div>
+          </div>
+          <div class="settings-sec">
+            <div class="settings-sec-title">🦶 Footer</div>
+            <div class="f-group"><label class="f-label">Footer Description</label><textarea id="st-footerdesc" class="f-textarea" style="min-height:70px" placeholder="Sri Lanka's platform for discovering…"></textarea></div>
+          </div>
+          <div class="settings-save-row">
+            <button class="save-btn" onclick="saveSettings()"><span id="settingsBtnTxt">Save Settings</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIALS VIEW -->
+      <div id="testimonialsView" style="display:none">
+        <div class="pg-header">
+          <div><div class="pg-title">Testimonials</div><div class="pg-sub">Manage reviews shown on the homepage</div></div>
+          <button class="add-btn" onclick="showTestiForm(null)">+ Add Testimonial</button>
+        </div>
+        <div id="testiList"><div class="loading"><div class="spinner"></div>Loading…</div></div>
+      </div>
+
+      <!-- TESTIMONIAL FORM -->
+      <div id="testiFormView" style="display:none">
+        <div class="pg-header"><div><div class="pg-title" id="testiFTitle">Add Testimonial</div></div></div>
+        <div class="settings-grid">
+          <div class="settings-sec">
+            <div style="display:grid;gap:14px">
+              <div class="f-group"><label class="f-label">Quote <span class="req">*</span></label><textarea id="tf-text" class="f-textarea" placeholder="What did they say about Rent My Space LK?"></textarea></div>
+              <div class="f-row">
+                <div class="f-group"><label class="f-label">Full Name <span class="req">*</span></label><input id="tf-name" class="f-input" type="text" placeholder="Dinesh Perera"/></div>
+                <div class="f-group"><label class="f-label">Role / Title</label><input id="tf-role" class="f-input" type="text" placeholder="Photographer, Colombo"/></div>
+              </div>
+              <div class="f-group">
+                <label class="f-label">Rating</label>
+                <div class="stars-row" id="starsRow">
+                  <button class="star-btn on" onclick="setStar(1)">★</button>
+                  <button class="star-btn on" onclick="setStar(2)">★</button>
+                  <button class="star-btn on" onclick="setStar(3)">★</button>
+                  <button class="star-btn on" onclick="setStar(4)">★</button>
+                  <button class="star-btn on" onclick="setStar(5)">★</button>
+                </div>
+              </div>
+              <div class="f-group"><label class="f-label">Display Order <small style="color:var(--muted);font-weight:400">(1 shows first)</small></label><input id="tf-order" class="f-input" type="number" min="1" value="1"/></div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="cancel-btn" onclick="showTestimonials()">Cancel</button>
+            <button class="save-btn" id="testSaveBtn" onclick="saveTestimonial()"><span id="testSaveTxt">Save</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL LINKS VIEW -->
+      <div id="socialsView" style="display:none">
+        <div class="pg-header"><div><div class="pg-title">Social Links</div><div class="pg-sub">These links appear as icons in the website footer</div></div></div>
+        <div class="settings-grid">
+          <div class="settings-sec">
+            <div class="settings-sec-title">📱 Social Media URLs</div>
+            <div style="display:grid;gap:14px">
+              <div class="soc-item"><div class="soc-icon">f</div><div class="f-group" style="flex:1"><label class="f-label">Facebook URL</label><input id="soc-facebook" class="f-input" type="url" placeholder="https://facebook.com/rentmyspacelk"/></div></div>
+              <div class="soc-item"><div class="soc-icon">in</div><div class="f-group" style="flex:1"><label class="f-label">LinkedIn URL</label><input id="soc-linkedin" class="f-input" type="url" placeholder="https://linkedin.com/company/…"/></div></div>
+              <div class="soc-item"><div class="soc-icon">📷</div><div class="f-group" style="flex:1"><label class="f-label">Instagram URL</label><input id="soc-instagram" class="f-input" type="url" placeholder="https://instagram.com/rentmyspacelk"/></div></div>
+              <div class="soc-item"><div class="soc-icon">▶</div><div class="f-group" style="flex:1"><label class="f-label">YouTube URL</label><input id="soc-youtube" class="f-input" type="url" placeholder="https://youtube.com/@…"/></div></div>
+            </div>
+          </div>
+          <div class="settings-save-row">
+            <button class="save-btn" onclick="saveSocials()"><span id="socialsBtnTxt">Save Links</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENQUIRIES VIEW -->
+      <div id="enquiriesView" style="display:none">
+        <div class="pg-header"><div><div class="pg-title">Space Listing Requests</div><div class="pg-sub" id="enqSubLabel">People who want to list their space</div></div></div>
+        <div id="enqList"><div class="loading"><div class="spinner"></div>Loading…</div></div>
+      </div>
+
     </main>
   </div>
 </div>
@@ -454,19 +599,15 @@ function showLoginErr(id, msg) {
 
 // ── NAV ──
 function showListings() {
+  hideAllViews(); setActiveBtn('btn-list');
   document.getElementById('listingsView').style.display = 'block';
-  document.getElementById('formView').style.display = 'none';
-  document.getElementById('btn-list').classList.add('active');
-  document.getElementById('btn-add').classList.remove('active');
   loadSpaces();
 }
 
 function showAddForm(data = null, id = null) {
   editId = id;
-  document.getElementById('listingsView').style.display = 'none';
+  hideAllViews(); setActiveBtn('btn-add');
   document.getElementById('formView').style.display = 'block';
-  document.getElementById('btn-list').classList.remove('active');
-  document.getElementById('btn-add').classList.add('active');
   document.getElementById('formTitle').textContent = id ? 'Edit Space' : 'Add New Space';
   document.getElementById('saveBtnTxt').textContent = id ? 'Update Space' : 'Save Space';
   document.getElementById('saveBtn').disabled = false;
@@ -692,8 +833,226 @@ function showToast(msg, type='') {
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
+// ── NAV HELPERS ──
+function setActiveBtn(id) {
+  ['btn-list','btn-add','btn-settings','btn-testi','btn-socials','btn-enq'].forEach(b => {
+    const el = document.getElementById(b); if(el) el.classList.remove('active');
+  });
+  const el = document.getElementById(id); if(el) el.classList.add('active');
+}
+function hideAllViews() {
+  ['listingsView','formView','settingsView','testimonialsView','testiFormView','socialsView','enquiriesView'].forEach(v => {
+    const el = document.getElementById(v); if(el) el.style.display='none';
+  });
+}
+
+// ── SITE SETTINGS ──
+async function showSettings() {
+  hideAllViews(); setActiveBtn('btn-settings');
+  document.getElementById('settingsView').style.display='block';
+  try {
+    const doc = await db.collection('settings').doc('site').get();
+    if (doc.exists) {
+      const d = doc.data();
+      document.getElementById('st-tagline').value = d.tagline||'';
+      document.getElementById('st-herosub').value = d.heroSub||'';
+      document.getElementById('st-cities').value = d.statCities||'';
+      document.getElementById('st-renters').value = d.statRenters||'';
+      document.getElementById('st-introbody').value = d.introBody||'';
+      document.getElementById('st-footerdesc').value = d.footerDesc||'';
+    }
+  } catch(e) {}
+}
+
+async function saveSettings() {
+  const btn = document.getElementById('settingsBtnTxt');
+  btn.textContent = 'Saving…';
+  try {
+    await db.collection('settings').doc('site').set({
+      tagline:    document.getElementById('st-tagline').value.trim(),
+      heroSub:    document.getElementById('st-herosub').value.trim(),
+      statCities: document.getElementById('st-cities').value.trim(),
+      statRenters:document.getElementById('st-renters').value.trim(),
+      introBody:  document.getElementById('st-introbody').value.trim(),
+      footerDesc: document.getElementById('st-footerdesc').value.trim(),
+      updatedAt:  firebase.firestore.FieldValue.serverTimestamp()
+    }, {merge:true});
+    showToast('Settings saved ✅','ok');
+  } catch(e) { showToast('Error: '+e.message,'err'); }
+  btn.textContent = 'Save Settings';
+}
+
+// ── TESTIMONIALS ──
+let testiEditId = null, testiStars = 5;
+
+async function showTestimonials() {
+  hideAllViews(); setActiveBtn('btn-testi');
+  document.getElementById('testimonialsView').style.display='block';
+  const el = document.getElementById('testiList');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading…</div>';
+  try {
+    const snap = await db.collection('testimonials').orderBy('order','asc').get();
+    if (snap.empty) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">💬</div><h3>No testimonials yet</h3><p>Add your first one using the button above.</p></div>'; return; }
+    el.innerHTML = '<div class="testi-list">' + snap.docs.map(d => {
+      const t = d.data();
+      return `<div class="testi-item">
+        <div class="testi-item-body">
+          <div class="testi-item-text">"${t.text}"</div>
+          <div class="testi-item-meta">${t.name}</div>
+          <div class="testi-item-role">${t.role||''} · ${'★'.repeat(t.stars||5)}</div>
+        </div>
+        <div class="testi-item-actions">
+          <button class="ti-btn ti-edit" onclick="showTestiForm('${d.id}')">Edit</button>
+          <button class="ti-btn ti-del" onclick="deleteTesti('${d.id}')">Delete</button>
+        </div>
+      </div>`;
+    }).join('') + '</div>';
+  } catch(e) { el.innerHTML = '<p style="color:var(--error);padding:20px">Error loading testimonials</p>'; }
+}
+
+async function showTestiForm(id) {
+  hideAllViews(); setActiveBtn('btn-testi');
+  testiEditId = id;
+  testiStars = 5;
+  document.getElementById('testiFormView').style.display='block';
+  document.getElementById('testiFTitle').textContent = id ? 'Edit Testimonial' : 'Add Testimonial';
+  document.getElementById('tf-text').value=''; document.getElementById('tf-name').value='';
+  document.getElementById('tf-role').value=''; document.getElementById('tf-order').value='1';
+  setStar(5);
+  if (id) {
+    try {
+      const doc = await db.collection('testimonials').doc(id).get();
+      if (doc.exists) {
+        const d = doc.data();
+        document.getElementById('tf-text').value = d.text||'';
+        document.getElementById('tf-name').value = d.name||'';
+        document.getElementById('tf-role').value = d.role||'';
+        document.getElementById('tf-order').value = d.order||1;
+        setStar(d.stars||5);
+      }
+    } catch(e) {}
+  }
+}
+
+function setStar(n) {
+  testiStars = n;
+  document.querySelectorAll('#starsRow .star-btn').forEach((b,i) => b.classList.toggle('on', i<n));
+}
+
+async function saveTestimonial() {
+  const text = document.getElementById('tf-text').value.trim();
+  const name = document.getElementById('tf-name').value.trim();
+  if (!text||!name) { showToast('Name and quote are required','err'); return; }
+  const btn = document.getElementById('testSaveTxt'); btn.textContent='Saving…';
+  const data = { text, name, role: document.getElementById('tf-role').value.trim(), stars: testiStars, order: Number(document.getElementById('tf-order').value)||1, updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+  try {
+    if (testiEditId) await db.collection('testimonials').doc(testiEditId).update(data);
+    else { data.createdAt = firebase.firestore.FieldValue.serverTimestamp(); await db.collection('testimonials').add(data); }
+    showToast('Testimonial saved ✅','ok');
+    setTimeout(() => showTestimonials(), 900);
+  } catch(e) { showToast('Error: '+e.message,'err'); }
+  btn.textContent='Save';
+}
+
+async function deleteTesti(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  try { await db.collection('testimonials').doc(id).delete(); showToast('Deleted','ok'); showTestimonials(); }
+  catch(e) { showToast('Error: '+e.message,'err'); }
+}
+
+// ── SOCIAL LINKS ──
+async function showSocials() {
+  hideAllViews(); setActiveBtn('btn-socials');
+  document.getElementById('socialsView').style.display='block';
+  try {
+    const doc = await db.collection('settings').doc('socials').get();
+    if (doc.exists) {
+      const d = doc.data();
+      document.getElementById('soc-facebook').value = d.facebook||'';
+      document.getElementById('soc-linkedin').value = d.linkedin||'';
+      document.getElementById('soc-instagram').value = d.instagram||'';
+      document.getElementById('soc-youtube').value = d.youtube||'';
+    }
+  } catch(e) {}
+}
+
+async function saveSocials() {
+  const btn = document.getElementById('socialsBtnTxt'); btn.textContent='Saving…';
+  try {
+    await db.collection('settings').doc('socials').set({
+      facebook:  document.getElementById('soc-facebook').value.trim(),
+      linkedin:  document.getElementById('soc-linkedin').value.trim(),
+      instagram: document.getElementById('soc-instagram').value.trim(),
+      youtube:   document.getElementById('soc-youtube').value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, {merge:true});
+    showToast('Social links saved ✅','ok');
+  } catch(e) { showToast('Error: '+e.message,'err'); }
+  btn.textContent='Save Links';
+}
+
+// ── ENQUIRIES ──
+async function showEnquiries() {
+  hideAllViews(); setActiveBtn('btn-enq');
+  document.getElementById('enquiriesView').style.display='block';
+  const el = document.getElementById('enqList');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading…</div>';
+  try {
+    const snap = await db.collection('enquiries').orderBy('createdAt','desc').get();
+    if (snap.empty) { el.innerHTML = '<div class="empty-state"><div class="empty-icon">📥</div><h3>No enquiries yet</h3><p>When someone fills in the "List Your Space" form, it will appear here.</p></div>'; return; }
+    const unread = snap.docs.filter(d => !d.data().read).length;
+    document.getElementById('enqSubLabel').textContent = `${snap.docs.length} total · ${unread} unread`;
+    el.innerHTML = '<div class="enq-list">' + snap.docs.map(d => {
+      const e = d.data();
+      const date = e.createdAt ? new Date(e.createdAt.seconds*1000).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'Unknown date';
+      const isNew = !e.read;
+      return `<div class="enq-item${isNew?' unread':''}">
+        <div class="enq-item-top">
+          <div class="enq-item-name">${e.name||'Unknown'}</div>
+          <span class="enq-item-badge ${isNew?'enq-badge-new':'enq-badge-read'}">${isNew?'New':'Read'}</span>
+        </div>
+        <div class="enq-item-meta">
+          <span>📍 ${e.city||'—'}</span>
+          <span>🏠 ${e.type||'—'}</span>
+          <span>📞 <a href="tel:${e.phone||''}" style="color:inherit;text-decoration:none">${e.phone||'—'}</a></span>
+          <span>📅 ${date}</span>
+        </div>
+        ${e.message ? `<div class="enq-item-msg">${e.message}</div>` : ''}
+        <div class="enq-item-actions">
+          ${e.phone ? `<a class="enq-contact-btn" href="tel:${e.phone}">📞 Call</a>` : ''}
+          ${e.phone ? `<a class="enq-contact-btn" href="https://wa.me/${e.phone.replace(/[^0-9]/g,'').replace(/^0/,'94')}" target="_blank">💬 WhatsApp</a>` : ''}
+          ${e.email ? `<a class="enq-contact-btn" href="mailto:${e.email}">✉️ Email</a>` : ''}
+          ${isNew ? `<button class="enq-contact-btn" onclick="markEnqRead('${d.id}',this)">✓ Mark Read</button>` : ''}
+          <button class="enq-del-btn" onclick="deleteEnq('${d.id}')">Delete</button>
+        </div>
+      </div>`;
+    }).join('') + '</div>';
+  } catch(e) { el.innerHTML = '<p style="color:var(--error);padding:20px">Error loading enquiries: '+e.message+'</p>'; }
+}
+
+async function markEnqRead(id, btn) {
+  try { await db.collection('enquiries').doc(id).update({read:true}); showEnquiries(); }
+  catch(e) { showToast('Error: '+e.message,'err'); }
+}
+
+async function deleteEnq(id) {
+  if (!confirm('Delete this enquiry?')) return;
+  try { await db.collection('enquiries').doc(id).delete(); showToast('Deleted','ok'); showEnquiries(); }
+  catch(e) { showToast('Error: '+e.message,'err'); }
+}
+
+async function loadEnqBadge() {
+  try {
+    const snap = await db.collection('enquiries').where('read','==',false).get();
+    const badge = document.getElementById('enqBadge');
+    if (snap.size > 0) badge.innerHTML = `<span class="badge-count">${snap.size}</span>`;
+    else badge.innerHTML = '';
+  } catch(e) {}
+}
+
 // Init
 renderImgGrid();
+loadEnqBadge();
 </script>
 </body>
 </html>
