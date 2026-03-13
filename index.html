@@ -95,7 +95,7 @@
     .fpill:hover, .fpill.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
     .spaces-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; }
     .space-card { position: relative; overflow: hidden; background: var(--warm); aspect-ratio: 3/4; }
-    .space-card:first-child { grid-row: span 2; aspect-ratio: auto; }
+    .sc-tall { grid-row: span 2; aspect-ratio: auto !important; }
     .sc-img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
     .space-card:hover .sc-img { transform: scale(1.07); }
     .sc-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--muted); }
@@ -110,7 +110,7 @@
     .sc-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 26px; z-index: 2; }
     .sc-type { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 5px; }
     .sc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 4px; }
-    .space-card:first-child .sc-name { font-size: 1.8rem; }
+    .sc-tall .sc-name { font-size: 1.8rem; }
     .sc-loc { font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 300; margin-bottom: 16px; }
     .sc-footer { display: flex; align-items: center; justify-content: space-between; }
     .sc-price { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--white); }
@@ -289,7 +289,7 @@
       nav,footer,section,.spaces-section,.cats,.cities,.testi,.how { padding-left: 28px !important; padding-right: 28px !important; }
       .search-inner { padding: 0 28px; }
       .spaces-grid { grid-template-columns: 1fr 1fr; }
-      .space-card:first-child { grid-row: auto; aspect-ratio: 3/4; }
+      .sc-tall { grid-row: auto; aspect-ratio: 3/4 !important; }
       .steps { grid-template-columns: 1fr 1fr; }
       .cats-list { grid-template-columns: repeat(3,1fr); }
       .cities-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -689,10 +689,21 @@ function updateCounts() {
 
 function renderSpaces(list) {
   if (!list.length) { document.getElementById('spacesGrid').innerHTML = '<div class="no-msg"><h3>No spaces found</h3><p>Try a different filter or check back soon.</p></div>'; return; }
-  document.getElementById('spacesGrid').innerHTML = list.map((s,i) => {
+  // Only apply the tall-first-card layout when there are 3+ spaces
+  const grid = document.getElementById('spacesGrid');
+  if (list.length >= 3) {
+    grid.style.gridTemplateColumns = 'repeat(3,1fr)';
+  } else if (list.length === 2) {
+    grid.style.gridTemplateColumns = 'repeat(2,1fr)';
+  } else {
+    grid.style.gridTemplateColumns = '1fr 1fr 1fr';
+  }
+  grid.innerHTML = list.map((s,i) => {
     const img = s.images && s.images[0] ? s.images[0] : null;
     const tagClass = s.badge === 'New' ? 'tag-terra' : (s.badge === 'Top Rated' || s.badge === 'Popular') ? 'tag-sage' : 'tag-white';
-    return `<div class="space-card" onclick="openModal('${s.id}')">
+    // Only make first card tall if there are 3+ listings
+    const isTall = i === 0 && list.length >= 3;
+    return `<div class="space-card${isTall?' sc-tall':''}" onclick="openModal('${s.id}')">
       ${img ? `<div class="sc-img" style="background-image:url('${img}')"></div>` : `<div class="sc-ph">🏠</div>`}
       <div class="sc-overlay"></div>
       ${s.badge ? `<div class="sc-tag ${tagClass}">${s.badge}</div>` : ''}
