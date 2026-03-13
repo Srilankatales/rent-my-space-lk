@@ -666,9 +666,10 @@ async function loadTestimonials() {
 // ── LOAD SPACES ──
 async function loadSpaces() {
   try {
-    const snap = await db.collection('spaces').where('active','==',true).orderBy('createdAt','desc').get();
+    const snap = await db.collection('spaces').where('active','==',true).get();
     allSpaces = [];
     snap.forEach(d => allSpaces.push({id:d.id,...d.data()}));
+    allSpaces.sort((a,b) => (b.createdAt && b.createdAt.seconds ? b.createdAt.seconds : 0) - (a.createdAt && a.createdAt.seconds ? a.createdAt.seconds : 0));
     updateCounts(); renderSpaces(allSpaces);
   } catch(e) {
     document.getElementById('spacesGrid').innerHTML = '<div class="no-msg"><h3>Coming Soon</h3><p>Our first spaces are being added and will appear here shortly.</p></div>';
