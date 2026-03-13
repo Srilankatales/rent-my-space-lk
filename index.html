@@ -259,7 +259,7 @@
     .c-val { font-size: 0.8rem; font-weight: 500; color: var(--ink); }
 
     /* ENQUIRY MODAL */
-    .enq-box { background: var(--white); max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(20,20,18,0.3); animation: mslide 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .enq-box { background: var(--white); max-width: 760px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(20,20,18,0.3); animation: mslide 0.35s cubic-bezier(0.25,0.46,0.45,0.94); }
     .enq-head { padding: 32px 36px 24px; border-bottom: 1px solid var(--border); position: relative; }
     .enq-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
     .enq-head h2 em { font-style: italic; color: var(--sage); }
@@ -540,48 +540,15 @@
     <div class="enq-head">
       <button class="m-close" style="position:absolute;top:18px;right:18px" onclick="closeEnquiry()">✕</button>
       <h2>List your <em>space</em></h2>
-      <p>Tell us about your space and we'll get in touch within 24 hours.</p>
+      <p>Fill in all the details below — we'll review and publish your listing within 24 hours.</p>
     </div>
-    <div class="enq-body" id="enqFormWrap">
-      <div class="enq-row">
-        <div class="enq-group half">
-          <label class="enq-label">Full Name <span class="req">*</span></label>
-          <input class="enq-input" id="enq-name" placeholder="Your name" type="text"/>
-        </div>
-        <div class="enq-group half">
-          <label class="enq-label">Phone / WhatsApp <span class="req">*</span></label>
-          <input class="enq-input" id="enq-phone" placeholder="07X XXX XXXX" type="tel"/>
-        </div>
-      </div>
-      <div class="enq-group">
-        <label class="enq-label">Email Address</label>
-        <input class="enq-input" id="enq-email" placeholder="you@example.com" type="email"/>
-      </div>
-      <div class="enq-row">
-        <div class="enq-group half">
-          <label class="enq-label">City <span class="req">*</span></label>
-          <input class="enq-input" id="enq-city" placeholder="Colombo, Kandy…" type="text"/>
-        </div>
-        <div class="enq-group half">
-          <label class="enq-label">Space Type <span class="req">*</span></label>
-          <select class="enq-select" id="enq-type">
-            <option value="">Select type…</option>
-            <option>Events</option><option>Hangout</option><option>Meeting Room</option>
-            <option>Office</option><option>Studio</option><option>Yoga / Meditation</option><option>Other</option>
-          </select>
-        </div>
-      </div>
-      <div class="enq-group">
-        <label class="enq-label">Tell us about your space</label>
-        <textarea class="enq-textarea" id="enq-desc" placeholder="Size, location, amenities, availability…"></textarea>
-      </div>
-      <button class="enq-submit" id="enqSubmitBtn" onclick="submitEnquiry()">Send Enquiry →</button>
-    </div>
+    <div class="enq-body" id="enqFormWrap"></div>
   </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 <script>
 firebase.initializeApp({
   apiKey:"AIzaSyDD0AaYbxSqlrqmNUuEKpxVu1NvubTNnng",
@@ -793,49 +760,142 @@ function closeModal(e) { if (e.target===document.getElementById('contactModal'))
 function closeModalDirect() { document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow=''; }
 
 // ── ENQUIRY MODAL ──
+let enqPhotos = []; // stores File objects
+
 function openEnquiry() {
+  enqPhotos = [];
   document.getElementById('enquiryModal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  document.getElementById('enqFormWrap').innerHTML = document.getElementById('enqFormWrap').innerHTML; // reset
-  // Re-render form
   document.getElementById('enqFormWrap').innerHTML = `
-    <div class="enq-row">
-      <div class="enq-group half"><label class="enq-label">Full Name <span class="req">*</span></label><input class="enq-input" id="enq-name" placeholder="Your name" type="text"/></div>
-      <div class="enq-group half"><label class="enq-label">Phone / WhatsApp <span class="req">*</span></label><input class="enq-input" id="enq-phone" placeholder="07X XXX XXXX" type="tel"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      <div class="enq-group" style="margin:0"><label class="enq-label">Full Name <span class="req">*</span></label><input class="enq-input" id="enq-name" placeholder="Your name" type="text"/></div>
+      <div class="enq-group" style="margin:0"><label class="enq-label">Phone / WhatsApp <span class="req">*</span></label><input class="enq-input" id="enq-phone" placeholder="07X XXX XXXX" type="tel"/></div>
     </div>
     <div class="enq-group"><label class="enq-label">Email Address</label><input class="enq-input" id="enq-email" placeholder="you@example.com" type="email"/></div>
-    <div class="enq-row">
-      <div class="enq-group half"><label class="enq-label">City <span class="req">*</span></label><input class="enq-input" id="enq-city" placeholder="Colombo, Kandy…" type="text"/></div>
-      <div class="enq-group half"><label class="enq-label">Space Type <span class="req">*</span></label>
-        <select class="enq-select" id="enq-type"><option value="">Select type…</option><option>Events</option><option>Hangout</option><option>Meeting Room</option><option>Office</option><option>Studio</option><option>Yoga / Meditation</option><option>Other</option></select>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      <div class="enq-group" style="margin:0"><label class="enq-label">Space Name <span class="req">*</span></label><input class="enq-input" id="enq-spacename" placeholder="e.g. Studio 5 Colombo" type="text"/></div>
+      <div class="enq-group" style="margin:0"><label class="enq-label">City <span class="req">*</span></label>
+        <select class="enq-select" id="enq-city">
+          <option value="">Select city…</option>
+          <option>Ampara</option><option>Anuradhapura</option><option>Badulla</option><option>Batticaloa</option>
+          <option>Chilaw</option><option>Colombo</option><option>Galle</option><option>Hambantota</option>
+          <option>Jaffna</option><option>Kalmunai</option><option>Kalutara</option><option>Kandy</option>
+          <option>Kegalle</option><option>Kurunegala</option><option>Mannar</option><option>Matale</option>
+          <option>Matara</option><option>Moratuwa</option><option>Negombo</option><option>Nuwara Eliya</option>
+          <option>Polonnaruwa</option><option>Puttalam</option><option>Ratnapura</option><option>Trincomalee</option>
+          <option>Vavuniya</option>
+        </select>
       </div>
     </div>
-    <div class="enq-group"><label class="enq-label">Tell us about your space</label><textarea class="enq-textarea" id="enq-desc" placeholder="Size, location, amenities, availability…"></textarea></div>
-    <button class="enq-submit" id="enqSubmitBtn" onclick="submitEnquiry()">Send Enquiry →</button>`;
+    <div class="enq-group"><label class="enq-label">Full Address <span class="req">*</span></label><input class="enq-input" id="enq-address" placeholder="e.g. 45 Galle Road, Colombo 3" type="text"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
+      <div class="enq-group" style="margin:0"><label class="enq-label">Space Type <span class="req">*</span></label>
+        <select class="enq-select" id="enq-type">
+          <option value="">Select type…</option>
+          <option>Events</option><option>Hangout</option><option>Meeting Room</option>
+          <option>Office</option><option>Studio</option><option>Yoga / Meditation</option><option>Other</option>
+        </select>
+      </div>
+      <div class="enq-group" style="margin:0"><label class="enq-label">Price (Rs.) <span class="req">*</span></label><input class="enq-input" id="enq-price" placeholder="e.g. 3000" type="number" min="0"/></div>
+      <div class="enq-group" style="margin:0"><label class="enq-label">Per</label>
+        <select class="enq-select" id="enq-unit"><option value="hour">Hour</option><option value="day">Day</option><option value="month">Month</option></select>
+      </div>
+    </div>
+    <div class="enq-group"><label class="enq-label">Description <span class="req">*</span></label><textarea class="enq-textarea" id="enq-desc" placeholder="Describe the space — size, facilities, amenities, parking, AC, nearby landmarks…"></textarea></div>
+    <div class="enq-group">
+      <label class="enq-label">Photos <span class="req">*</span> <span style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0">(up to 5 images)</span></label>
+      <div id="enqPhotoGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px"></div>
+      <input type="file" id="enqFileInput" accept="image/*" multiple style="display:none" onchange="handleEnqPhotos(event)"/>
+      <div id="enqUploadProg" style="display:none;font-size:0.78rem;color:var(--sage);margin-top:6px">⏳ Uploading photos…</div>
+    </div>
+    <button class="enq-submit" id="enqSubmitBtn" onclick="submitEnquiry()">Submit Listing →</button>`;
+  renderEnqPhotoGrid();
 }
+
+function renderEnqPhotoGrid() {
+  const grid = document.getElementById('enqPhotoGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const slot = document.createElement('div');
+    const hasPhoto = enqPhotos[i];
+    slot.style.cssText = 'aspect-ratio:1;border-radius:8px;overflow:hidden;border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;background:var(--cream);position:relative;cursor:pointer;';
+    if (hasPhoto) {
+      slot.style.borderStyle = 'solid';
+      const src = URL.createObjectURL(enqPhotos[i]);
+      slot.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover"/><button onclick="removeEnqPhoto(${i})" style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;border:none;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>`;
+    } else {
+      slot.innerHTML = `<div style="text-align:center"><div style="font-size:1.2rem;color:var(--muted)">+</div><div style="font-size:0.58rem;color:var(--muted);margin-top:2px">Photo ${i+1}</div></div>`;
+      slot.onclick = () => { document.getElementById('enqFileInput').value=''; document.getElementById('enqFileInput').click(); };
+    }
+    grid.appendChild(slot);
+  }
+}
+
+function handleEnqPhotos(e) {
+  const files = Array.from(e.target.files);
+  let slot = enqPhotos.length;
+  for (const f of files) {
+    while (slot < 5 && enqPhotos[slot] !== undefined) slot++;
+    if (slot >= 5) break;
+    enqPhotos[slot] = f;
+    slot++;
+  }
+  renderEnqPhotoGrid();
+}
+
+function removeEnqPhoto(i) {
+  enqPhotos.splice(i, 1);
+  renderEnqPhotoGrid();
+}
+
 function closeEnquiry() { document.getElementById('enquiryModal').classList.remove('open'); document.body.style.overflow=''; }
 function closeEnquiryBg(e) { if (e.target===document.getElementById('enquiryModal')) closeEnquiry(); }
 
 async function submitEnquiry() {
-  const name  = document.getElementById('enq-name').value.trim();
-  const phone = document.getElementById('enq-phone').value.trim();
-  const city  = document.getElementById('enq-city').value.trim();
-  const type  = document.getElementById('enq-type').value;
-  if (!name || !phone || !city || !type) { alert('Please fill in all required fields.'); return; }
+  const name      = document.getElementById('enq-name').value.trim();
+  const phone     = document.getElementById('enq-phone').value.trim();
+  const spacename = document.getElementById('enq-spacename').value.trim();
+  const city      = document.getElementById('enq-city').value;
+  const address   = document.getElementById('enq-address').value.trim();
+  const type      = document.getElementById('enq-type').value;
+  const price     = document.getElementById('enq-price').value.trim();
+  const desc      = document.getElementById('enq-desc').value.trim();
+  if (!name || !phone || !spacename || !city || !address || !type || !price || !desc) {
+    alert('Please fill in all required fields marked with *'); return;
+  }
+  if (enqPhotos.length === 0) { alert('Please add at least one photo of your space.'); return; }
   const btn = document.getElementById('enqSubmitBtn');
-  btn.disabled = true; btn.textContent = 'Sending…';
+  btn.disabled = true; btn.textContent = 'Submitting…';
   try {
+    // Upload photos to Firebase Storage
+    const stor = firebase.storage ? firebase.storage() : null;
+    const photoUrls = [];
+    if (stor && enqPhotos.length) {
+      document.getElementById('enqUploadProg').style.display = 'block';
+      const enqId = 'enq_' + Date.now();
+      for (let i = 0; i < enqPhotos.length; i++) {
+        const ref = stor.ref(`enquiries/${enqId}/photo_${i}`);
+        const snap = await ref.put(enqPhotos[i]);
+        photoUrls.push(await snap.ref.getDownloadURL());
+      }
+      document.getElementById('enqUploadProg').style.display = 'none';
+    }
     await db.collection('enquiries').add({
       name, phone,
-      email: document.getElementById('enq-email').value.trim(),
-      city, type,
-      message: document.getElementById('enq-desc').value.trim(),
+      email:     document.getElementById('enq-email').value.trim(),
+      spacename, city, address, type,
+      price:     Number(price),
+      priceUnit: document.getElementById('enq-unit').value,
+      message:   desc,
+      photos:    photoUrls,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       read: false
     });
-    document.getElementById('enqFormWrap').innerHTML = `<div class="enq-success"><div style="font-size:3rem;margin-bottom:16px">🎉</div><h3>Enquiry sent!</h3><p>Thank you, ${name}. We'll review your space and get back to you within 24 hours.</p></div>`;
+    document.getElementById('enqFormWrap').innerHTML = `<div class="enq-success"><div style="font-size:3rem;margin-bottom:16px">🎉</div><h3>Listing submitted!</h3><p>Thank you, ${name}. We'll review your space and publish it within 24 hours.</p></div>`;
   } catch(e) {
-    btn.disabled=false; btn.textContent='Send Enquiry →';
+    document.getElementById('enqUploadProg').style.display = 'none';
+    btn.disabled=false; btn.textContent='Submit Listing →';
     alert('Something went wrong. Please try again.');
   }
 }
