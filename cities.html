@@ -39,16 +39,14 @@
 
     /* CITIES GRID */
     .cities-wrap { padding: 0 48px 100px; max-width: 1200px; margin: 0 auto; }
-    .cities-grid-full { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-    .city-card { position: relative; overflow: hidden; height: 280px; text-decoration: none; display: block; }
-    .city-card.large { height: 420px; }
+    .cities-grid-full { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+    .city-card { position: relative; overflow: hidden; height: 260px; text-decoration: none; display: block; }
     .city-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94); }
     .city-card:hover .city-bg { transform: scale(1.07); }
     .city-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,20,18,0.75) 0%, rgba(20,20,18,0.1) 55%, transparent 100%); transition: background 0.3s; }
     .city-card:hover .city-overlay { background: linear-gradient(to top, rgba(20,20,18,0.85) 0%, rgba(20,20,18,0.2) 55%, transparent 100%); }
     .city-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 26px; }
     .city-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; color: var(--white); line-height: 1; margin-bottom: 5px; }
-    .city-card.large .city-name { font-size: 2.8rem; }
     .city-prov { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
     .city-count { display: inline-block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.85); border-radius: 2px; transition: background 0.2s; }
     .city-card:hover .city-count { background: var(--sage); border-color: var(--sage); color: var(--white); }
@@ -136,7 +134,7 @@
     /* RESPONSIVE */
     @media(max-width:1024px) {
       nav, .page-header, .cities-wrap, .lp-body { padding-left: 28px; padding-right: 28px; }
-      .cities-grid-full { grid-template-columns: repeat(2,1fr); }
+      .cities-grid-full { grid-template-columns: repeat(3,1fr); }
       .spaces-grid { grid-template-columns: 1fr 1fr; }
     }
     @media(max-width:640px) {
@@ -240,7 +238,7 @@ document.addEventListener('mousemove', e => { cur.style.left=e.clientX+'px'; cur
 
 // ── CITY DATA ──
 const CITIES = [
-  { name:'Colombo',      province:'Western Province',        img:'https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=800&auto=format&fit=crop&q=80', large:true },
+  { name:'Colombo',      province:'Western Province',        img:'https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=800&auto=format&fit=crop&q=80' },
   { name:'Kandy',        province:'Central Province',        img:'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&auto=format&fit=crop&q=80' },
   { name:'Galle',        province:'Southern Province',       img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80' },
   { name:'Negombo',      province:'Western Province',        img:'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&auto=format&fit=crop&q=80' },
@@ -282,7 +280,7 @@ function renderCities() {
   grid.innerHTML = CITIES.map(c => {
     const count = allSpaces.filter(s => s.city && s.city.toLowerCase() === c.name.toLowerCase()).length;
     const countLabel = count === 0 ? 'No spaces yet' : count === 1 ? '1 space' : `${count} spaces`;
-    return `<a class="city-card${c.large?' large':''}" href="#" onclick="openCity('${c.name}');return false;">
+    return `<a class="city-card" href="#" onclick="openCity('${c.name}');return false;">
       <div class="city-bg" style="background-image:url('${c.img}')"></div>
       <div class="city-overlay"></div>
       <div class="city-info">
