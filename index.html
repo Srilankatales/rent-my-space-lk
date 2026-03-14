@@ -700,6 +700,7 @@ function filterByType(type, btn) {
   if (btn) { document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active')); btn.classList.add('active'); }
   const filtered = type ? allSpaces.filter(s => s.type && s.type.toLowerCase().includes(type.toLowerCase())) : allSpaces;
   renderSpaces(filtered);
+  if (type) trackEvent('typeClicks', { spaceType: type });
 }
 
 function filterByCity(city) {
@@ -708,6 +709,7 @@ function filterByCity(city) {
   const filtered = allSpaces.filter(s => s.city && s.city.toLowerCase().includes(city.toLowerCase()));
   renderSpaces(filtered);
   scrollTo('spacesAnchor');
+  trackEvent('cityClicks', { city });
 }
 
 function doSearch() {
@@ -744,10 +746,11 @@ function openModal(id, e) {
   const init = (s.contactName||'SP').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
   document.getElementById('mPerson').innerHTML = `<div class="m-av">${init}</div><div><div class="m-pname">${s.contactName||'Space Owner'}</div><div class="m-prole">Contact Person</div></div>`;
   const links = [];
-  if (s.contactMobile) links.push(`<a class="c-link" href="tel:${s.contactMobile}"><div class="c-icon">📱</div><div><div class="c-label">Call</div><div class="c-val">${s.contactMobile}</div></div></a>`);
-  if (s.contactWhatsapp) links.push(`<a class="c-link" href="${s.contactWhatsapp}" target="_blank"><div class="c-icon">💬</div><div><div class="c-label">WhatsApp</div><div class="c-val">Chat Now</div></div></a>`);
-  if (s.contactEmail) links.push(`<a class="c-link" href="mailto:${s.contactEmail}"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val">${s.contactEmail}</div></div></a>`);
+  if (s.contactMobile) links.push(`<a class="c-link" href="tel:${s.contactMobile}" onclick="trackLead('leads_call','${s.id}','${s.name}')"><div class="c-icon">📱</div><div><div class="c-label">Call</div><div class="c-val">${s.contactMobile}</div></div></a>`);
+  if (s.contactWhatsapp) links.push(`<a class="c-link" href="${s.contactWhatsapp}" target="_blank" onclick="trackLead('leads_whatsapp','${s.id}','${s.name}')"><div class="c-icon">💬</div><div><div class="c-label">WhatsApp</div><div class="c-val">Chat Now</div></div></a>`);
+  if (s.contactEmail) links.push(`<a class="c-link" href="mailto:${s.contactEmail}" onclick="trackLead('leads_email','${s.id}','${s.name}')"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val">${s.contactEmail}</div></div></a>`);
   document.getElementById('mContacts').innerHTML = links.join('');
+  trackEvent('spaceViews', { spaceId: s.id, spaceName: s.name, spaceType: s.type, city: s.city });
   document.getElementById('contactModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -905,10 +908,40 @@ document.addEventListener('keydown', e => {
 });
 function toggleFav(e, btn) { e.stopPropagation(); btn.textContent = btn.textContent.trim()==='🤍'?'❤️':'🤍'; }
 
+
+// ── ANALYTICS TRACKING ──
+function today() { return new Date().toISOString().slice(0,10); }
+
+async function trackEvent(type, meta = {}) {
+  try {
+    const d = today();
+    const dayRef = db.collection('analytics_daily').doc(d);
+    const updates = { updatedAt: firebase.firestore.FieldValue.serverTimestamp() };
+    updates[type] = firebase.firestore.FieldValue.increment(1);
+    if (meta.city)  updates[`cities.${meta.city}`]  = firebase.firestore.FieldValue.increment(1);
+    if (meta.spaceType) updates[`types.${meta.spaceType}`] = firebase.firestore.FieldValue.increment(1);
+    await dayRef.set(updates, {merge:true});
+
+    if (meta.spaceId) {
+      const spaceRef = db.collection('analytics_spaces').doc(`${meta.spaceId}_${d}`);
+      const spaceUp = { spaceId: meta.spaceId, spaceName: meta.spaceName||'', date: d };
+      spaceUp[type] = firebase.firestore.FieldValue.increment(1);
+      await spaceRef.set(spaceUp, {merge:true});
+    }
+  } catch(e) { /* silent fail — never break the site */ }
+}
+
+async function trackLead(type, spaceId, spaceName) {
+  // type = 'leads_whatsapp' | 'leads_call' | 'leads_email'
+  await trackEvent(type, { spaceId, spaceName });
+  await trackEvent('leads_total', { spaceId, spaceName });
+}
+
 // ── INIT ──
 loadSiteSettings();
 loadTestimonials();
 loadSpaces();
+trackEvent('pageViews');
 </script>
 </body>
 </html>

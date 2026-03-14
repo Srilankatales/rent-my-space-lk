@@ -201,6 +201,60 @@
     .cb-cancel:hover { border-color: var(--ink); }
     .cb-del { padding: 9px 20px; border-radius: 9px; border: none; background: var(--error); color: white; cursor: pointer; font-family: 'Figtree', sans-serif; font-size: 0.82rem; font-weight: 700; transition: all 0.2s; }
     .cb-del:hover { background: #B91C1C; }
+
+    /* ── ANALYTICS ── */
+    .analytics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 28px; }
+    .stat-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 20px 22px; }
+    .stat-card-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .stat-card-val { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+    .stat-card-sub { font-size: 0.7rem; color: var(--muted); }
+    .stat-card.highlight { background: var(--ink); border-color: var(--ink); }
+    .stat-card.highlight .stat-card-label { color: rgba(255,255,255,0.45); }
+    .stat-card.highlight .stat-card-val { color: var(--white); }
+    .stat-card.highlight .stat-card-sub { color: rgba(255,255,255,0.35); }
+    .stat-card.green { border-color: var(--sage); }
+    .stat-card.green .stat-card-val { color: var(--sage); }
+    .analytics-row { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-bottom: 18px; }
+    .analytics-row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .a-panel { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 22px 24px; }
+    .a-panel-title { font-size: 0.75rem; font-weight: 800; color: var(--ink); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+    .a-panel-title span { font-weight: 400; color: var(--muted); text-transform: none; letter-spacing: 0; font-size: 0.72rem; }
+    /* Bar chart */
+    .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 140px; padding-bottom: 24px; position: relative; }
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+    .bar-group { display: flex; gap: 2px; align-items: flex-end; width: 100%; }
+    .bar { border-radius: 3px 3px 0 0; min-height: 3px; transition: opacity 0.2s; flex: 1; }
+    .bar:hover { opacity: 0.75; }
+    .bar-visits { background: var(--surface-2); }
+    .bar-leads { background: var(--sage); }
+    .bar-label { font-size: 0.58rem; color: var(--muted); text-align: center; white-space: nowrap; }
+    .bar-legend { display: flex; gap: 16px; margin-bottom: 12px; }
+    .bar-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.68rem; color: var(--ink-2); }
+    .bar-legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+    /* Table */
+    .a-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    .a-table th { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0 10px 10px 0; text-align: left; border-bottom: 1px solid var(--border); }
+    .a-table td { padding: 11px 10px 11px 0; border-bottom: 1px solid var(--surface); color: var(--ink-2); vertical-align: middle; }
+    .a-table tr:last-child td { border-bottom: none; }
+    .a-table .a-num { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--ink); }
+    .a-table .a-lead { color: var(--sage); font-weight: 700; }
+    .a-table .a-name { font-weight: 600; color: var(--ink); }
+    /* Horizontal bar */
+    .h-bar-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .h-bar-row { display: flex; flex-direction: column; gap: 4px; }
+    .h-bar-top { display: flex; justify-content: space-between; font-size: 0.75rem; }
+    .h-bar-label { font-weight: 600; color: var(--ink-2); }
+    .h-bar-val { color: var(--muted); }
+    .h-bar-track { height: 7px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+    .h-bar-fill { height: 100%; border-radius: 4px; background: var(--sage); transition: width 0.7s ease; }
+    .h-bar-fill.terra { background: var(--accent); }
+    /* Download btn */
+    .dl-btn { display: flex; align-items: center; gap: 7px; padding: 8px 18px; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; cursor: pointer; font-family: 'Figtree', sans-serif; font-size: 0.78rem; font-weight: 700; color: var(--ink-2); transition: all 0.2s; }
+    .dl-btn:hover { border-color: var(--sage); color: var(--sage); }
+    .period-tabs { display: flex; gap: 4px; }
+    .period-tab { padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border); font-family: 'Figtree', sans-serif; font-size: 0.7rem; font-weight: 700; cursor: pointer; background: transparent; color: var(--muted); transition: all 0.2s; }
+    .period-tab.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .a-empty { text-align:center; padding: 30px 10px; color: var(--muted); font-size: 0.8rem; }
   </style>
 </head>
 <body>
@@ -254,6 +308,8 @@
       <button class="sb-btn" id="btn-settings" onclick="showSettings()"><span>⚙️</span> Site Settings</button>
       <button class="sb-btn" id="btn-testi" onclick="showTestimonials()"><span>💬</span> Testimonials</button>
       <button class="sb-btn" id="btn-socials" onclick="showSocials()"><span>📱</span> Social Links</button>
+      <div class="sb-label">Analytics</div>
+      <button class="sb-btn" id="btn-analytics" onclick="showAnalytics()"><span>📊</span> Reports</button>
       <div class="sb-label">Enquiries</div>
       <button class="sb-btn" id="btn-enq" onclick="showEnquiries()"><span>📥</span> List Requests <span id="enqBadge"></span></button>
     </aside>
@@ -533,6 +589,67 @@
         <div id="enqList"><div class="loading"><div class="spinner"></div>Loading…</div></div>
       </div>
 
+
+      <!-- ANALYTICS VIEW -->
+      <div id="analyticsView" style="display:none">
+        <div class="pg-header">
+          <div>
+            <div class="pg-title">Analytics & Reports</div>
+            <div class="pg-sub" id="analyticsSubLabel">Loading data…</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="period-tabs">
+              <button class="period-tab active" onclick="setPeriod(30,this)">30 Days</button>
+              <button class="period-tab" onclick="setPeriod(7,this)">7 Days</button>
+              <button class="period-tab" onclick="setPeriod(90,this)">90 Days</button>
+            </div>
+            <button class="dl-btn" onclick="downloadCSV()">⬇ Download CSV</button>
+          </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="analytics-grid" id="overviewCards">
+          <div class="a-panel" style="grid-column:1/-1;text-align:center;padding:40px"><div class="spinner" style="margin:0 auto 12px"></div><div style="color:var(--muted);font-size:0.82rem">Loading analytics…</div></div>
+        </div>
+
+        <!-- Trend Chart + Lead Table -->
+        <div class="analytics-row">
+          <div class="a-panel">
+            <div class="a-panel-title">Monthly Trend <span id="chartPeriodLabel">Last 6 months</span></div>
+            <div class="bar-legend">
+              <div class="bar-legend-item"><div class="bar-legend-dot" style="background:var(--surface-2)"></div>Site Visits</div>
+              <div class="bar-legend-item"><div class="bar-legend-dot" style="background:var(--sage)"></div>Total Leads</div>
+            </div>
+            <div class="bar-chart" id="trendChart"><div class="a-empty">No data yet</div></div>
+          </div>
+          <div class="a-panel">
+            <div class="a-panel-title">Lead Breakdown</div>
+            <div id="leadBreakdown"><div class="a-empty">No leads yet</div></div>
+          </div>
+        </div>
+
+        <!-- Space Performance Table -->
+        <div class="a-panel" style="margin-bottom:18px">
+          <div class="a-panel-title">Space Performance <span>Views & leads per listing</span></div>
+          <div id="spaceTable"><div class="a-empty">No data yet</div></div>
+        </div>
+
+        <!-- City + Type -->
+        <div class="analytics-row three">
+          <div class="a-panel">
+            <div class="a-panel-title">Top Cities</div>
+            <div class="h-bar-wrap" id="cityChart"><div class="a-empty">No data yet</div></div>
+          </div>
+          <div class="a-panel">
+            <div class="a-panel-title">Space Types</div>
+            <div class="h-bar-wrap" id="typeChart"><div class="a-empty">No data yet</div></div>
+          </div>
+          <div class="a-panel">
+            <div class="a-panel-title">Enquiries per Month</div>
+            <div id="enqChart"><div class="a-empty">No data yet</div></div>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 </div>
@@ -852,6 +969,276 @@ function fillWhatsapp() {
   if (m.startsWith('0')) m = '94'+m.substring(1);
   else if (!m.startsWith('94')) m = '94'+m;
   document.getElementById('f-wa').value = `https://wa.me/${m}`;
+}
+
+
+// ── ANALYTICS ──
+let analyticsPeriod = 30;
+let analyticsCache = null;
+
+function setPeriod(days, btn) {
+  analyticsPeriod = days;
+  document.querySelectorAll('.period-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAnalytics(analyticsCache);
+}
+
+async function showAnalytics() {
+  hideAllViews(); setActiveBtn('btn-analytics');
+  document.getElementById('analyticsView').style.display = 'block';
+  document.getElementById('analyticsSubLabel').textContent = 'Loading data…';
+  await loadAnalyticsData();
+}
+
+async function loadAnalyticsData() {
+  try {
+    // Get last 90 days of daily stats
+    const days = [];
+    for (let i = 89; i >= 0; i--) {
+      const d = new Date(); d.setDate(d.getDate() - i);
+      days.push(d.toISOString().slice(0,10));
+    }
+
+    // Batch fetch daily analytics
+    const dailySnap = await db.collection('analytics_daily').get();
+    const dailyMap = {};
+    dailySnap.forEach(doc => { dailyMap[doc.id] = doc.data(); });
+
+    // Fetch space analytics
+    const spaceSnap = await db.collection('analytics_spaces').get();
+    const spaceMap = {};
+    spaceSnap.forEach(doc => {
+      const d = doc.data();
+      if (!spaceMap[d.spaceId]) spaceMap[d.spaceId] = { spaceName: d.spaceName, views:0, leads_call:0, leads_whatsapp:0, leads_email:0, leads_total:0 };
+      spaceMap[d.spaceId].views          += d.spaceViews || 0;
+      spaceMap[d.spaceId].leads_call     += d.leads_call || 0;
+      spaceMap[d.spaceId].leads_whatsapp += d.leads_whatsapp || 0;
+      spaceMap[d.spaceId].leads_email    += d.leads_email || 0;
+      spaceMap[d.spaceId].leads_total    += d.leads_total || 0;
+    });
+
+    // Fetch enquiries for monthly count
+    const enqSnap = await db.collection('enquiries').get();
+    const enqByMonth = {};
+    enqSnap.forEach(doc => {
+      const d = doc.data();
+      if (d.createdAt) {
+        const mo = new Date(d.createdAt.seconds*1000).toISOString().slice(0,7);
+        enqByMonth[mo] = (enqByMonth[mo]||0) + 1;
+      }
+    });
+
+    analyticsCache = { days, dailyMap, spaceMap, enqByMonth };
+    renderAnalytics(analyticsCache);
+  } catch(e) {
+    document.getElementById('analyticsSubLabel').textContent = 'Error loading data: ' + e.message;
+  }
+}
+
+function renderAnalytics(data) {
+  if (!data) return;
+  const { days, dailyMap, spaceMap, enqByMonth } = data;
+
+  // Filter to selected period
+  const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - analyticsPeriod);
+  const cutoffStr = cutoff.toISOString().slice(0,10);
+  const periodDays = days.filter(d => d >= cutoffStr);
+
+  // Aggregate period totals
+  let totalVisits=0, totalSpaceViews=0, totalLeads=0, totalWA=0, totalCall=0, totalEmail=0;
+  const cityTotals={}, typeTotals={};
+  periodDays.forEach(d => {
+    const row = dailyMap[d] || {};
+    totalVisits     += row.pageViews   || 0;
+    totalSpaceViews += row.spaceViews  || 0;
+    totalLeads      += row.leads_total || 0;
+    totalWA         += row.leads_whatsapp || 0;
+    totalCall       += row.leads_call  || 0;
+    totalEmail      += row.leads_email || 0;
+    if (row.cities) Object.entries(row.cities).forEach(([c,v]) => cityTotals[c]=(cityTotals[c]||0)+v);
+    if (row.types)  Object.entries(row.types).forEach(([t,v])  => typeTotals[t]=(typeTotals[t]||0)+v);
+  });
+
+  const convRate = totalSpaceViews > 0 ? Math.round((totalLeads/totalSpaceViews)*100) : 0;
+
+  document.getElementById('analyticsSubLabel').textContent =
+    `Last ${analyticsPeriod} days · Updated just now`;
+
+  // ── Overview Cards ──
+  document.getElementById('overviewCards').innerHTML = `
+    <div class="stat-card highlight">
+      <div class="stat-card-label">Site Visits</div>
+      <div class="stat-card-val">${totalVisits.toLocaleString()}</div>
+      <div class="stat-card-sub">Last ${analyticsPeriod} days</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-card-label">Total Leads</div>
+      <div class="stat-card-val">${totalLeads.toLocaleString()}</div>
+      <div class="stat-card-sub">WA · Call · Email</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Space Views</div>
+      <div class="stat-card-val">${totalSpaceViews.toLocaleString()}</div>
+      <div class="stat-card-sub">Listings opened</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-label">Conversion Rate</div>
+      <div class="stat-card-val">${convRate}%</div>
+      <div class="stat-card-sub">Views → Lead</div>
+    </div>`;
+
+  // ── Trend Chart (monthly, last 6 months) ──
+  const months = [];
+  for (let i=5;i>=0;i--) {
+    const d = new Date(); d.setMonth(d.getMonth()-i);
+    months.push(d.toISOString().slice(0,7));
+  }
+  const monthlyVisits={}, monthlyLeads={};
+  Object.entries(dailyMap).forEach(([date,row]) => {
+    const mo = date.slice(0,7);
+    if (months.includes(mo)) {
+      monthlyVisits[mo] = (monthlyVisits[mo]||0) + (row.pageViews||0);
+      monthlyLeads[mo]  = (monthlyLeads[mo]||0)  + (row.leads_total||0);
+    }
+  });
+  const maxV = Math.max(1, ...months.map(m => monthlyVisits[m]||0));
+  const chartHtml = months.map(m => {
+    const v = monthlyVisits[m]||0;
+    const l = monthlyLeads[m]||0;
+    const vH = Math.round((v/maxV)*120);
+    const lH = Math.round((l/maxV)*120);
+    const label = new Date(m+'-01').toLocaleString('default',{month:'short'});
+    return `<div class="bar-wrap">
+      <div class="bar-group">
+        <div class="bar bar-visits" style="height:${vH}px" title="${v} visits"></div>
+        <div class="bar bar-leads"  style="height:${Math.max(lH,3)}px" title="${l} leads"></div>
+      </div>
+      <div class="bar-label">${label}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('trendChart').innerHTML = chartHtml || '<div class="a-empty">No data yet</div>';
+
+  // ── Lead Breakdown donut-style ──
+  const total = totalWA + totalCall + totalEmail || 1;
+  document.getElementById('leadBreakdown').innerHTML = `
+    <div class="h-bar-wrap">
+      <div style="text-align:center;margin-bottom:18px">
+        <div style="font-family:'DM Serif Display',serif;font-size:2.8rem;color:var(--ink)">${totalLeads}</div>
+        <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Total Leads</div>
+      </div>
+      <div class="h-bar-row">
+        <div class="h-bar-top"><span class="h-bar-label">💬 WhatsApp</span><span class="h-bar-val">${totalWA}</span></div>
+        <div class="h-bar-track"><div class="h-bar-fill" style="width:${Math.round(totalWA/total*100)}%"></div></div>
+      </div>
+      <div class="h-bar-row">
+        <div class="h-bar-top"><span class="h-bar-label">📞 Call</span><span class="h-bar-val">${totalCall}</span></div>
+        <div class="h-bar-track"><div class="h-bar-fill terra" style="width:${Math.round(totalCall/total*100)}%"></div></div>
+      </div>
+      <div class="h-bar-row">
+        <div class="h-bar-top"><span class="h-bar-label">✉️ Email</span><span class="h-bar-val">${totalEmail}</span></div>
+        <div class="h-bar-track"><div class="h-bar-fill" style="background:var(--ink-2);width:${Math.round(totalEmail/total*100)}%"></div></div>
+      </div>
+    </div>`;
+
+  // ── Space Performance Table ──
+  const spaceRows = Object.entries(spaceMap).sort((a,b) => (b[1].leads_total||0)-(a[1].leads_total||0));
+  if (spaceRows.length) {
+    document.getElementById('spaceTable').innerHTML = `
+      <table class="a-table">
+        <thead><tr>
+          <th>Space</th>
+          <th>Views</th>
+          <th>💬 WhatsApp</th>
+          <th>📞 Call</th>
+          <th>✉️ Email</th>
+          <th>Total Leads</th>
+          <th>Conv. Rate</th>
+        </tr></thead>
+        <tbody>${spaceRows.map(([id,s]) => `<tr>
+          <td class="a-name">${s.spaceName||id}</td>
+          <td class="a-num">${s.views}</td>
+          <td>${s.leads_whatsapp||0}</td>
+          <td>${s.leads_call||0}</td>
+          <td>${s.leads_email||0}</td>
+          <td class="a-lead">${s.leads_total||0}</td>
+          <td>${s.views>0?Math.round(((s.leads_total||0)/s.views)*100):0}%</td>
+        </tr>`).join('')}</tbody>
+      </table>`;
+  } else {
+    document.getElementById('spaceTable').innerHTML = '<div class="a-empty">No space performance data yet — data appears as visitors interact with listings.</div>';
+  }
+
+  // ── City Chart ──
+  const topCities = Object.entries(cityTotals).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const maxC = Math.max(1,...topCities.map(c=>c[1]));
+  document.getElementById('cityChart').innerHTML = topCities.length ?
+    topCities.map(([city,val]) => `
+      <div class="h-bar-row">
+        <div class="h-bar-top"><span class="h-bar-label">${city}</span><span class="h-bar-val">${val}</span></div>
+        <div class="h-bar-track"><div class="h-bar-fill" style="width:${Math.round(val/maxC*100)}%"></div></div>
+      </div>`).join('') : '<div class="a-empty">No city data yet</div>';
+
+  // ── Type Chart ──
+  const topTypes = Object.entries(typeTotals).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const maxT = Math.max(1,...topTypes.map(t=>t[1]));
+  document.getElementById('typeChart').innerHTML = topTypes.length ?
+    topTypes.map(([type,val]) => `
+      <div class="h-bar-row">
+        <div class="h-bar-top"><span class="h-bar-label">${type}</span><span class="h-bar-val">${val}</span></div>
+        <div class="h-bar-track"><div class="h-bar-fill terra" style="width:${Math.round(val/maxT*100)}%"></div></div>
+      </div>`).join('') : '<div class="a-empty">No type data yet</div>';
+
+  // ── Enquiries by Month ──
+  const enqMonths = months.map(m => ({ m, count: enqByMonth[m]||0 }));
+  const maxE = Math.max(1,...enqMonths.map(e=>e.count));
+  document.getElementById('enqChart').innerHTML = `
+    <div class="bar-chart" style="height:120px">
+      ${enqMonths.map(({m,count}) => {
+        const h = Math.round((count/maxE)*100);
+        const label = new Date(m+'-01').toLocaleString('default',{month:'short'});
+        return `<div class="bar-wrap">
+          <div class="bar bar-leads" style="height:${Math.max(h,3)}px;background:var(--accent)" title="${count}"></div>
+          <div class="bar-label">${label}<br/><strong>${count}</strong></div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+// ── CSV EXPORT ──
+function downloadCSV() {
+  if (!analyticsCache) { showToast('No data to export yet','err'); return; }
+  const { days, dailyMap, spaceMap, enqByMonth } = analyticsCache;
+
+  let csv = 'RENT MY SPACE LK — ANALYTICS REPORT\n';
+  csv += 'Generated: ' + new Date().toLocaleString() + '\n\n';
+
+  // Daily summary
+  csv += 'DAILY SUMMARY\n';
+  csv += 'Date,Page Views,Space Views,Total Leads,WhatsApp Leads,Call Leads,Email Leads\n';
+  days.forEach(d => {
+    const r = dailyMap[d]||{};
+    csv += `${d},${r.pageViews||0},${r.spaceViews||0},${r.leads_total||0},${r.leads_whatsapp||0},${r.leads_call||0},${r.leads_email||0}\n`;
+  });
+
+  csv += '\nSPACE PERFORMANCE\n';
+  csv += 'Space Name,Total Views,WhatsApp Leads,Call Leads,Email Leads,Total Leads,Conversion Rate\n';
+  Object.entries(spaceMap).forEach(([id,s]) => {
+    const conv = s.views > 0 ? Math.round(((s.leads_total||0)/s.views)*100) : 0;
+    csv += `"${s.spaceName||id}",${s.views},${s.leads_whatsapp||0},${s.leads_call||0},${s.leads_email||0},${s.leads_total||0},${conv}%\n`;
+  });
+
+  csv += '\nENQUIRIES BY MONTH\n';
+  csv += 'Month,New Enquiries\n';
+  Object.entries(enqByMonth).sort().forEach(([m,c]) => { csv += `${m},${c}\n`; });
+
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `rentmyspace-analytics-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Report downloaded ✅','ok');
 }
 
 // ── TOAST ──
